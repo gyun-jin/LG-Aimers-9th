@@ -48,14 +48,12 @@ candidates/<모델명>/
 ├── model/model.pkl
 ├── train.py
 ├── script.py
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
 - `train.py`: 모델 학습 및 `model/model.pkl` 생성
 - `script.py`: 제출 환경에서 모델을 불러와 추론
 - `requirements.txt`: 해당 `.pkl`을 로드하는 데 필요한 정확한 라이브러리 버전
-- `README.md`: 담당자, 모델명, 사용 피처, seed, 검증 점수
 
 `.pkl`을 변경할 때는 반드시 같은 후보의 `script.py`와 `requirements.txt`도
 확인합니다. 대용량 모델은 GitHub의 파일 크기 제한에 걸릴 수 있으므로, 100 MB가
@@ -99,7 +97,9 @@ chore: update model requirements
 ## Python 및 문서 스타일
 
 - Python 파일과 폴더 이름은 lowercase 또는 `snake_case`를 사용합니다.
-- 클래스는 `PascalCase`, 함수와 변수는 `snake_case`, 상수는 `UPPER_CASE`를 사용합니다.
+
 - import는 표준 라이브러리, 외부 라이브러리, 로컬 코드 순서로 작성합니다.
+
 - 복잡한 전처리 함수에는 입력과 출력이 무엇인지 짧은 주석 또는 독스트링을 남깁니다.
+
 - Markdown 문서는 제목과 목록을 사용해 읽기 쉽게 작성하고, 코드 변경 시 관련 문서도 갱신합니다.
