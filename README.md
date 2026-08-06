@@ -53,8 +53,7 @@ pip install -r candidates\lgbm_v1\requirements.txt
 
 1. `candidates/<모델명>/model/model.pkl`
 2. `candidates/<모델명>/script.py`의 `FEATURE_COLUMNS`와 `make_features()`
-3. `candidates/<모델명>/README.md`의 담당자, 사용 피처, 검증 점수
-4. 필요한 경우 `requirements.txt`의 라이브러리와 버전
+3. 필요한 경우 `requirements.txt`의 라이브러리와 버전
 
 ## 제출 준비
 
