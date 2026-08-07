@@ -1,0 +1,11 @@
+{
+  "selected_ensemble": "catboost_lightgbm_xgboost",
+  "weights": {
+    "catboost": 0.6000000000000001,
+    "lightgbm": 0.05,
+    "xgboost": 0.35000000000000003
+  },
+  "calibration": "platt",
+  "weight_search_increment": 0.05,
+  "selection_metric": "0.2*Brier(2022)+0.3*Brier(2023)+0.5*Brier(2024)"
+}
