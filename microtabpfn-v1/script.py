@@ -41,9 +41,9 @@ import torch.nn.functional as F
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_MODEL_PATH = ROOT / "model" / "model.pkl"
-DEFAULT_TEST_PATH = ROOT.parent / "data" / "test.csv"
-DEFAULT_SAMPLE_PATH = ROOT.parent / "data" / "sample_submission.csv"
-DEFAULT_OUTPUT_PATH = ROOT / "prediction.csv"
+DEFAULT_TEST_PATH = ROOT / "data" / "test.csv"
+DEFAULT_SAMPLE_PATH = ROOT / "data" / "sample_submission.csv"
+DEFAULT_OUTPUT_PATH = ROOT / "output" / "submission.csv"
 ID_COLUMN = "row_id"
 
 
