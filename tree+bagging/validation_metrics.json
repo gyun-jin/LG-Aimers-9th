@@ -1,0 +1,19 @@
+{
+  "train_seasons": "2019-2023",
+  "validation_season": 2024,
+  "train_rows": 1221585,
+  "validation_rows": 253507,
+  "n_features": 23,
+  "raw": {
+    "accuracy": 0.533161,
+    "roc_auc": 0.542364,
+    "log_loss": 0.690001,
+    "brier_score": 0.248431
+  },
+  "calibrated": {
+    "accuracy": 0.533678,
+    "roc_auc": 0.542364,
+    "log_loss": 0.689849,
+    "brier_score": 0.248355
+  }
+}
