@@ -1,8 +1,9 @@
 # Tree + Bagging baseline
 
 `train.py` fits a submission-ready `DecisionTreeClassifier` ensemble using
-`BaggingClassifier`. It validates on 2019-2023 -> 2024, applies sigmoid
-probability calibration, then refits the tree ensemble on all labelled data.
+`BaggingClassifier`. It validates on 2019-2023 -> 2024, then refits the tree
+ensemble on all labelled data. Calibration is intentionally omitted because
+the submission checklist requires calibration to be learned from past OOF predictions.
 
 ```powershell
 pip install -r tree+bagging\requirements.txt

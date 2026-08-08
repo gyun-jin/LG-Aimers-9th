@@ -19,7 +19,6 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import BaggingClassifier
 from sklearn.impute import SimpleImputer
-from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, brier_score_loss, log_loss, roc_auc_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder
@@ -188,37 +187,31 @@ def save_tree_plot(model: Pipeline) -> None:
 
 
 def main() -> None:
-    print("[1/5] Reading train.csv ...", flush=True)
+    print("[1/4] Reading train.csv ...", flush=True)
     frame = pd.read_csv(DATA_DIR / "train.csv")
     train_part, valid_part = temporal_split(frame)
     x_train, y_train = make_features(train_part), train_part[TARGET].astype(int)
     x_valid, y_valid = make_features(valid_part), valid_part[TARGET].astype(int)
 
     print(
-        f"[2/5] Temporal validation: {len(x_train):,} train / {len(x_valid):,} valid ...",
+        f"[2/4] Temporal validation: {len(x_train):,} train / {len(x_valid):,} valid ...",
         flush=True,
     )
     validation_model = make_model(x_train)
     validation_model.fit(x_train, y_train)
     raw_probability = validation_model.predict_proba(x_valid)[:, 1]
 
-    # A sigmoid map corrects leaf probabilities without changing their ranking.
-    print("[3/5] Fitting sigmoid probability calibration ...", flush=True)
-    calibrator = LogisticRegression(random_state=RANDOM_STATE)
-    calibrator.fit(raw_probability.reshape(-1, 1), y_valid)
-    calibrated_probability = calibrator.predict_proba(raw_probability.reshape(-1, 1))[:, 1]
     metrics = {
         "train_seasons": "2019-2023",
         "validation_season": 2024,
         "train_rows": len(train_part),
         "validation_rows": len(valid_part),
         "n_features": len(FEATURE_COLUMNS),
-        "raw": evaluate(y_valid, raw_probability),
-        "calibrated": evaluate(y_valid, calibrated_probability),
+        "validation": evaluate(y_valid, raw_probability),
     }
     print(json.dumps(metrics, indent=2), flush=True)
 
-    print(f"[4/5] Refitting final model on {len(frame):,} rows ...", flush=True)
+    print(f"[3/4] Refitting final model on {len(frame):,} rows ...", flush=True)
     x_all, y_all = make_features(frame), frame[TARGET].astype(int)
     final_model = make_model(x_all)
     final_model.fit(x_all, y_all)
@@ -226,14 +219,13 @@ def main() -> None:
     MODEL_DIR.mkdir(exist_ok=True)
     artifact = {
         "model": final_model,
-        "calibrator": calibrator,
         "feature_columns": FEATURE_COLUMNS,
     }
     with (MODEL_DIR / "model.pkl").open("wb") as model_file:
         pickle.dump(artifact, model_file)
     (ROOT / "validation_metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
     save_tree_plot(final_model)
-    print("[5/5] Export complete.", flush=True)
+    print("[4/4] Export complete.", flush=True)
     print(f"Saved model to {MODEL_DIR / 'model.pkl'}")
     print(f"Saved metrics to {ROOT / 'validation_metrics.json'}")
     print(f"Saved tree visualization to {ROOT / 'tree_preview.png'}")
