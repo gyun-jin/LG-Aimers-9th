@@ -28,7 +28,6 @@ candidates/submit_v3/
 | 항목 | 값 |
 |---|---:|
 | 실제 리더보드 점수 | 914점 |
-| 제출 기준 파일 | `/Users/park-yoonjin/Documents/LG Aimers/해커톤/3/submit.zip` |
 | 로컬 2024 Brier reference | 0.24803100 |
 | Trackman | 미사용 |
 
@@ -55,15 +54,6 @@ candidates/submit_v3/
 test 내부 통계나 rolling feature를 새로 만들지 않고, 저장된 모델 artifact와 schema를
 사용합니다.
 
-## v4 TabM 실험 대비 판단
-
-`/4`의 TabM 실험은 TabM, CatBoost, XGBoost 조합을 검토했지만 로컬 2024 holdout
-Brier가 v3 reference보다 낮지 않았습니다. v4 selected Brier는 `0.24910706`으로,
-v3 reference `0.24803100`보다 불리했습니다.
-
-따라서 실제 리더보드 914점 제출 이력이 있고, CatBoost + XGBoost 중심의 단순한
-앙상블 구조이며, Trackman 미사용으로 제출 안정성과 검증 근거가 더 명확한 v3를
-팀 공유 후보로 우선 정리합니다.
 
 ## 실행
 
