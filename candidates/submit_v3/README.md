@@ -16,6 +16,8 @@ candidates/submit_v3/
 ├── script.py
 ├── requirements.txt
 ├── README.md
+├── docs/
+│   └── submit3_model_analysis.md
 └── submit.zip
 ```
 
@@ -75,3 +77,7 @@ python script.py
 - 이 폴더의 `script.py`, `requirements.txt`, `model/` 내용은 `/3/submit.zip`에서
   그대로 추출했습니다.
 - 추가 학습이나 모델 변환을 하지 않았습니다.
+
+## 참고 문서
+
+- [3/submit.zip 모델 분석](docs/submit3_model_analysis.md)
