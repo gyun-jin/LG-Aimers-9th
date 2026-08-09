@@ -1,0 +1,11 @@
+{
+  "selected_ensemble": "catboost_lightgbm_xgboost",
+  "weights": {
+    "catboost": 0.65,
+    "lightgbm": 0.0,
+    "xgboost": 0.35
+  },
+  "calibration": "platt",
+  "weight_search_increment": 0.05,
+  "selection_metric": "2024 temporal OOF Brier"
+}
