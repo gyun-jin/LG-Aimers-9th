@@ -1,0 +1,7 @@
+**
+!checker.py
+!checker/
+!checker/**
+!*.zip
+!**/
+!**/*.zip
