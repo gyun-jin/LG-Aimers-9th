@@ -112,6 +112,26 @@ def find_input(explicit_path: str | None) -> Path:
     raise FileNotFoundError(f"Could not find test.csv. Checked:\n{checked}")
 
 
+def find_model() -> Path:
+    """Locate model.pkl even if the evaluator flattens the model directory."""
+    candidates = [ROOT / "model" / "model.pkl", ROOT / "model.pkl"]
+    for path in candidates:
+        if path.is_file():
+            return path
+
+    discovered = sorted(path for path in ROOT.rglob("model.pkl") if path.is_file())
+    if len(discovered) == 1:
+        return discovered[0]
+
+    packaged_files = sorted(
+        str(path.relative_to(ROOT)) for path in ROOT.rglob("*") if path.is_file()
+    )
+    raise FileNotFoundError(
+        "Could not locate model.pkl in the extracted submission. "
+        f"Packaged files: {packaged_files}"
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=None, help="Optional test.csv path")
@@ -130,13 +150,18 @@ def main() -> None:
     print(f"[1/4] Loaded {len(frame):,} rows in {time.perf_counter() - read_started:.3f}s", flush=True)
 
     load_started = time.perf_counter()
-    with (ROOT / "model" / "model.pkl").open("rb") as model_file:
+    model_path = find_model()
+    with model_path.open("rb") as model_file:
         artifact = pickle.load(model_file)
     if artifact["feature_columns"] != FEATURE_COLUMNS:
         raise ValueError("model.pkl and script.py use different feature definitions.")
     model = artifact["model"]
     model.named_steps["model"].n_jobs = 6
-    print(f"[2/4] Loaded model in {time.perf_counter() - load_started:.3f}s", flush=True)
+    print(
+        f"[2/4] Loaded {model_path.relative_to(ROOT)} in "
+        f"{time.perf_counter() - load_started:.3f}s",
+        flush=True,
+    )
 
     predict_started = time.perf_counter()
     probability = np.clip(model.predict_proba(features)[:, 1], 0.0, 1.0)
