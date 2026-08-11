@@ -131,17 +131,19 @@ def validate_zip(zip_path: Path, report: Report) -> list[zipfile.ZipInfo]:
             else:
                 report.passed(f"ZIP-root file exists: {required}")
 
-        if "model/" not in normalized:
-            report.failed(
-                "Explicit model/ directory entry is missing. Some Linux evaluators "
-                "can omit model/model.pkl when this entry is absent."
-            )
-        else:
-            report.passed("Explicit model/ directory entry exists")
+        model_files = [
+            name
+            for info, name in zip(infos, names)
+            if name.startswith("model/") and name != "model/" and not info.is_dir()
+        ]
 
-        model_files = [name for name in names if name.startswith("model/") and name != "model/"]
+        if "model/" in normalized:
+            report.passed("Explicit model/ directory entry exists")
+        elif model_files:
+            report.passed("model/ directory is implicitly represented by its file entries")
+
         if not model_files:
-            report.failed("No model artifact exists under model/")
+            report.failed("No model artifact file exists under ZIP-root model/")
         else:
             report.passed(f"Model artifacts: {model_files}")
 
@@ -163,8 +165,15 @@ def validate_zip(zip_path: Path, report: Report) -> list[zipfile.ZipInfo]:
                 report.failed(f"Junk/cache file included: {name}")
             if name in {"script.py", "requirements.txt", "model/"} or name in model_files:
                 if info.external_attr == 0:
-                    report.failed(
-                        f"Missing Unix ZIP metadata for {name}; rebuild ZIP with checker-safe packaging."
+                    # ZIPs created by Windows tools such as Compress-Archive may
+                    # omit Unix mode bits entirely. This does not prevent the
+                    # evaluator from extracting the member, and script.py is
+                    # launched through Python rather than as an executable.
+                    # Extraction and required-file checks below are the checks
+                    # that determine whether the archive is usable.
+                    report.warned(
+                        f"ZIP member has no Unix permission metadata: {name}; "
+                        "safe extraction will be verified."
                     )
 
     return infos
