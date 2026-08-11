@@ -20,7 +20,7 @@
 
 따라서 다음과 같은 실제 제출 실패를 미리 찾을 수 있습니다.
 
-- 평가 환경에서 `.pkl` 모델이 정상적으로 로드되지 않는 문제
+- 평가 환경에서 모델 가중치 파일이 정상적으로 로드되지 않는 문제
 - 학습 환경과 패키지 버전이 달라 발생하는 호환성 문제
 - 필요한 패키지가 `requirements.txt`에 빠진 문제
 - 모델이 기대하는 특성과 추론 시 생성한 특성이 다른 문제
@@ -52,7 +52,7 @@
 
 ```text
 aimers_projects/
-├─ baseline_submit.zip
+├─ submit.zip
 ├─ checker.py
 ├─ checker/
 │  ├─ Dockerfile
@@ -65,7 +65,7 @@ aimers_projects/
 제출 ZIP 루트에는 다음 항목이 있어야 합니다.
 
 ```text
-submission.zip
+submit.zip
 ├─ script.py
 ├─ requirements.txt
 └─ model/
@@ -92,7 +92,7 @@ ZIP 이름을 첫 번째 인자로 지정하면 됩니다. 프로젝트 루트�
 
 PowerShell에서 일반적으로 권장하는 상대경로 표기는 `./submit.zip` 또는 `.\submit.zip`입니다. 존재하지 않는 파일을 입력하면 프로젝트에서 발견한 ZIP 목록을 오류 메시지에 함께 보여줍니다.
 
-ZIP이 하위 폴더에 있더라도 같은 파일명이 하나뿐이면 파일명만 입력해 자동으로 찾을 수 있습니다. 경로가 분명한 경우에는 다음과 같이 전체 상대경로를 지정하는 것이 가장 안전합니다.
+ZIP이 하위 폴더에 있더라도 같은 파일명이 하나뿐이면 파일명만 입력해 자동으로 찾을 수 있습니다. 경로가 분명한 경우에는 다음과 같이 전체 상대경로를 지정하는 것이 가장 안전합니다. 따라서 전체 경로를 지정하는 것을 권장합니다.
 
 ```powershell
 ./checker/run-checker.ps1 ./test/submit_v3.zip -DataDir ./data
