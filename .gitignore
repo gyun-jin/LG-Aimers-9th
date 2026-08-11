@@ -8,3 +8,9 @@ outputs/
 .pytest_cache/
 .mypy_cache/
 .DS_Store
+*.pem
+*.pyc
+catboost_info/
+data/train.csv
+data/test.csv
+data/trackman_history.csv
