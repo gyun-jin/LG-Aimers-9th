@@ -6,7 +6,7 @@
   "n_features": 23,
   "validation": {
     "accuracy": 0.533161,
-    "roc_auc": 0.542364,
+    "roc_auc": 0.542363,
     "log_loss": 0.690001,
     "brier_score": 0.248431
   }

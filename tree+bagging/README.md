@@ -1,5 +1,23 @@
 # Tree + Bagging baseline
 
+## Evaluation-environment compatibility
+
+`requirements.txt` is pinned to the documented evaluation-server versions:
+
+```text
+numpy==1.26.4
+pandas==2.0.3
+scikit-learn==1.8.0
+scipy==1.15.3
+joblib==1.5.3
+```
+
+The existing `model/model.pkl` and `submit.zip` were created with the older
+NumPy 2.3.5 / scikit-learn 1.7.2 environment. They are not compatible with the
+versions above. After changing environments, run `train.py` to create a new
+`model/model.pkl`, run inference once, and rebuild the submission ZIP. Do not
+package the existing model with the updated requirements.
+
 `train.py` fits a submission-ready `DecisionTreeClassifier` ensemble using
 `BaggingClassifier`. It validates on 2019-2023 -> 2024, then refits the tree
 ensemble on all labelled data. Calibration is intentionally omitted because
