@@ -1,48 +1,48 @@
-# TRACKMAN_USAGE
+# Trackman 사용 방식
 
-## Files
+## 사용 파일
 
-- `pitcher_id_mapping_clean.csv`: maps official `pitcher_id` to `pitcher_trackman_id`
-- `trackman_history.csv`: official historical Trackman data, not committed here because it is a large source file
-- `trackman_features.py`: reusable feature-generation wrapper
+- `pitcher_id_mapping_clean.csv`: 공식 `pitcher_id`와 `pitcher_trackman_id`를 연결하는 매핑 파일
+- `trackman_history.csv`: 공식 과거 Trackman 데이터. 대용량 원본 파일이라 이 Git 패키지에는 포함하지 않음
+- `trackman_features.py`: Trackman 피처 생성 공통 wrapper
 
-## Mapping
+## 매핑 방식
 
-The feature builder joins:
+Trackman 피처 생성기는 다음 순서로 투수를 연결한다.
 
 ```text
 train/test pitcher_id -> pitcher_id_mapping_clean.csv -> pitcher_trackman_id
 ```
 
-Then it looks up historical Trackman rows by `pitcher_trackman_id`.
+이후 `pitcher_trackman_id`로 과거 Trackman 기록을 조회한다.
 
-## Strategy
+## 전략
 
 - strategy: `mapping_all_shrink`
 - feature_set: `5-2_server_957`
-- Trackman feature count: `29`
+- Trackman 피처 수: `29`
 
-`mapping_all_shrink` uses every available mapping and shrinks low-history summaries toward hand/season priors. It also emits metadata features so the model knows whether the Trackman information is strong, weak, or missing.
+`mapping_all_shrink`는 가능한 매핑을 모두 사용하되, 이력이 적은 투수의 요약값은 손잡이/시즌 prior 쪽으로 shrink한다. 또한 모델이 Trackman 정보의 신뢰도를 판단할 수 있도록 매핑 신뢰도와 이력 여부 metadata를 함께 제공한다.
 
-## Temporal Rule
+## 시간 기준
 
-For each row, only Trackman rows from seasons earlier than the row's `season` are summarized.
+각 row에 대해 해당 row의 `season`보다 이전 시즌 Trackman 기록만 요약한다.
 
-Examples:
+예시:
 
-- 2023 row uses 2019-2022 Trackman history.
-- 2024 row uses 2019-2023 Trackman history.
-- 2025 test row uses 2019-2024 Trackman history.
+- 2023 row는 2019-2022 Trackman 이력만 사용
+- 2024 row는 2019-2023 Trackman 이력만 사용
+- 2025 test row는 2019-2024 Trackman 이력만 사용
 
-## Not Used
+## 사용하지 않은 정보
 
-- Current pitch Trackman measurement
-- 2025 Trackman data
-- Current pitch actual location
-- Current pitch judged result
-- Current pitch actual pitch type
-- 1:1 joining of current train/test pitch rows to current Trackman rows
+- 현재 투구의 Trackman 측정값
+- 2025년 Trackman 데이터
+- 현재 투구 실제 위치
+- 현재 투구 판정 결과
+- 현재 투구 실제 구종
+- 현재 train/test pitch row와 Trackman row의 현재 투구 단위 1:1 직접 결합
 
-## Submission Behavior
+## 제출 시 동작
 
-The submission does not reread `trackman_history.csv`. The training process builds `tm_state` and stores it inside `model/final_model.joblib`. At inference, `script.py` uses that saved state to rebuild Trackman features for test rows.
+제출 스크립트는 원본 `trackman_history.csv`를 다시 읽지 않는다. 학습 과정에서 `tm_state`를 만들고, 이 상태를 `model/final_model.joblib` 안에 저장한다. 추론 시 `script.py`는 저장된 `tm_state`를 사용해 test row의 Trackman 피처를 재생성한다.

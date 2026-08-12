@@ -1,19 +1,19 @@
 # 5-2 전체 fold 재검증
 
-| candidate | calibration | mean Brier | worst Brier | 2022 | 2023 | 2024 | mean AUC | mean_pred | mean_target |
+| 후보 | 보정 방식 | 평균 Brier | 최악 Brier | 2022 | 2023 | 2024 | 평균 AUC | 평균 예측값 | 평균 정답률 |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | tm_metadata_physical_pitchmix | platt | 0.24697678 | 0.24986318 | 0.24329609 | 0.24986318 | 0.24777107 | 0.551951 | 0.506995 | 0.504994 |
 | tm_metadata_physical_core | platt | 0.24697681 | 0.24992642 | 0.24325105 | 0.24992642 | 0.24775297 | 0.551726 | 0.507267 | 0.504994 |
 | v5_no_trackman_recheck | prior_correction | 0.24699625 | 0.24986132 | 0.24330797 | 0.24986132 | 0.24781945 | 0.552058 | 0.508127 | 0.504994 |
 
-- /5 reference mean/worst: `0.24717070` / `0.24979486`
+- /5 기준 평균/최악 Brier: `0.24717070` / `0.24979486`
 - 전체 fold 기준으로 /5보다 평균과 최악 fold가 모두 낮아야 제출 후보로 본다.
 
 ## 해석
 
-- `tm_metadata_physical_pitchmix`는 같은 full validation에서 no-Trackman 재검증보다 평균 Brier를 `-0.00001947` 낮췄다.
-- 하지만 worst fold는 `0.24986318`로 no-Trackman 재검증의 `0.24986132`보다 `+0.00000186` 높다.
-- `/5` 기존 quick reference의 worst `0.24979486`보다도 높다.
+- `tm_metadata_physical_pitchmix`는 같은 전체 검증에서 no-Trackman 재검증보다 평균 Brier를 `-0.00001947` 낮췄다.
+- 하지만 최악 fold는 `0.24986318`로 no-Trackman 재검증의 `0.24986132`보다 `+0.00000186` 높다.
+- `/5` 기존 빠른 검증 기준의 최악 Brier `0.24979486`보다도 높다.
 - 따라서 Trackman 제한 피처가 평균 성능에는 도움이 됐지만, 최악 fold 안정성 기준으로는 아직 제출 후보로 확정하기 어렵다.
 
 ## 판단
@@ -22,7 +22,7 @@
 
 우선순위:
 
-1. `tm_metadata_physical_pitchmix`에서 2023에 나쁜 물리/구종 피처를 제거하는 ablation
-2. `tm_metadata_only` 또는 `tm_metadata_pitchmix`를 full validation으로 추가 확인
+1. `tm_metadata_physical_pitchmix`에서 2023에 나쁜 물리/구종 피처를 제거하는 제거 실험
+2. `tm_metadata_only` 또는 `tm_metadata_pitchmix`를 전체 검증으로 추가 확인
 3. platt 대신 `/5`와 같은 `prior_correction` 기준으로 재비교
-4. worst fold 기준이 개선되는 경우에만 최종 full-fit과 submit.zip 생성
+4. 최악 fold 기준이 개선되는 경우에만 최종 전체 학습과 submit.zip 생성

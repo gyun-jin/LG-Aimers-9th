@@ -1,52 +1,54 @@
-# SCORE_REPORT
+# 점수 보고서
 
-## Version
+## 버전
 
-- Version: `v5-2`
-- Server score: `957.6800554874`
+- 버전명: `v5-2`
+- 서버 점수: `957.6800554874`
 
-## Submission Record
+## 제출 기록
 
-`5-2/submit.zip` was submitted and returned `957.6800554874`.
+`5-2/submit.zip`을 제출했고 서버에서 `957.6800554874`점을 받았다.
 
-## Local Validation
+## 로컬 검증
 
-The final build report recorded:
+최종 빌드 보고서 기준:
 
-- OOF mean Brier: `0.24696139`
-- OOF worst Brier: `0.24986192`
-- feature count: `118`
-- model weights: CatBoost `0.8`, LightGBM `0.2`
-- calibration: Platt
+- OOF 평균 Brier: `0.24696139`
+- OOF 최악 Brier: `0.24986192`
+- 피처 수: `118`
+- 모델 가중치: CatBoost `0.8`, LightGBM `0.2`
+- 보정 방식: Platt
 
-## Improvement Over Previous Versions
+## 이전 버전 대비 개선
 
-The v5 baseline already performed well, but v5-2 added prior-season Trackman summaries. Server score improved from the prior known v5 score `938.2526739958` to `957.6800554874`.
+기존 v5도 서버에서 좋은 점수였지만, v5-2는 이전 시즌 Trackman 투수 요약 피처를 추가했다. 확인된 v5 서버 점수 `938.2526739958`에서 v5-2 서버 점수 `957.6800554874`로 상승했다.
 
-## Why Trackman Helped
+## Trackman 피처가 도움이 된 이유
 
-Trackman summaries add pitcher-level physical and pitch-mix context that official row-wise game state does not fully encode:
+Trackman 요약 피처는 공식 행 단위 경기 상황만으로는 알기 어려운 투수의 물리적 특성과 구종 성향을 제공한다.
 
-- release speed stability
-- spin-rate profile
-- release position stability
-- extension
-- fastball/breaking/offspeed tendency
-- mapping/history confidence
+주요 추가 정보:
 
-These features let the model distinguish pitchers with similar game context but different historical mechanics and pitch profiles.
+- 과거 구속 안정성
+- 회전수 특성
+- 릴리스 위치 안정성
+- 익스텐션
+- fastball/breaking/offspeed 비율
+- 매핑 신뢰도와 이력 충분성
 
-## Limitations
+이 정보는 같은 경기 상황에 있는 투수라도 과거 투구 특성이 다르면 제구 성공 확률이 달라질 수 있다는 점을 모델에 알려준다.
 
-- Trackman mapping quality varies by pitcher.
-- Low-history pitchers rely heavily on priors.
-- OOF gains were small; server gain was larger than local validation suggested.
-- Deep models were not part of v5-2.
+## 한계점
 
-## Next Improvements
+- 투수별 Trackman 매핑 품질이 다르다.
+- 이력이 적은 투수는 사전 평균 의존도가 높다.
+- 로컬 OOF 개선 폭은 작았고, 서버 개선 폭이 더 크게 나타났다.
+- v5-2에는 딥러닝 모델이 포함되지 않았다.
 
-- Combine Trackman features with FT-Transformer/TabM embeddings.
-- Add Trackman-aware stacking or gating by mapping confidence.
-- Improve calibration beyond fixed Platt calibration.
-- Search fold-specific or group-specific ensemble weights.
-- Test Trackman feature subsets separately for CatBoost and LightGBM.
+## 다음 개선 방향
+
+- FT-Transformer/TabM 임베딩과 Trackman 피처 결합
+- Trackman 매핑 신뢰도 기반 스태킹 또는 게이팅
+- Platt 보정 외의 보정 방식 탐색
+- fold별 또는 group별 앙상블 가중치 탐색
+- CatBoost와 LightGBM에 서로 다른 Trackman 피처 부분집합 적용

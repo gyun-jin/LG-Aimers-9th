@@ -9,13 +9,13 @@
 - `trackman_history.csv`
   - 2019-2024 Trackman 과거 투구 기록.
 - `trackman_features.py`
-  - 매핑과 Trackman history를 읽어 prior-season 투수 요약 피처를 만드는 공통 모듈.
+  - 매핑과 Trackman 과거 기록을 읽어 이전 시즌 투수 요약 피처를 만드는 공통 모듈.
 - `trackman_reuse_guide.md`
   - 다른 모델에 Trackman 피처를 붙이는 사용 가이드.
 
 ## 사용 방식
 
-학습 코드에서 루트의 `trackman_features.py`를 import하거나, 이 폴더의 복사본을 import해서 쓴다.
+학습 코드에서 루트의 `trackman_features.py`를 가져오거나, 이 폴더의 복사본을 가져와서 쓴다.
 
 ```python
 import pandas as pd
@@ -38,12 +38,12 @@ features = tm.append_trackman_features(
 
 - 서버 점수: `957.6800554874`
 - 전략: `mapping_all_shrink`
-- feature_set: `5-2_server_957`
+- 피처셋: `5-2_server_957`
 - Trackman 피처 수: `29`
-- categorical 추가 컬럼: `tm_mapping_confidence_bucket`
+- 범주형 추가 컬럼: `tm_mapping_confidence_bucket`
 
 ## 주의
 
 - 학습 때는 `pitcher_id_mapping_clean.csv`와 `trackman_history.csv`가 필요하다.
-- 제출 때는 원본 CSV를 다시 읽지 말고, 학습 때 만든 `tm_state`를 model bundle에 저장하는 방식이 안전하다.
-- Trackman 피처는 각 row의 `season`보다 이전 시즌 기록만 요약해서 붙인다.
+- 제출 때는 원본 CSV를 다시 읽지 말고, 학습 때 만든 `tm_state`를 모델 번들에 저장하는 방식이 안전하다.
+- Trackman 피처는 각 행의 `season`보다 이전 시즌 기록만 요약해서 붙인다.

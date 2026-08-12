@@ -1,36 +1,37 @@
-# PREPROCESSING
+# 전처리
 
-## Missing Values
+## 결측치 처리
 
-- Categorical columns are converted to strings and missing values are filled with `__MISSING__`.
-- Numeric columns are converted with `pd.to_numeric`.
-- Rate features are smoothed with train-fitted priors.
-- Trackman missing history is represented by metadata flags and hand/season priors.
+- 범주형 컬럼은 문자열로 변환하고 결측값은 `__MISSING__`로 채운다.
+- 수치형 컬럼은 `pd.to_numeric`으로 변환한다.
+- 비율 계열 피처는 학습 데이터에서 계산한 사전 평균으로 완화한다.
+- Trackman 이력이 없는 투수는 투수 손잡이/시즌 사전 평균과 메타데이터 플래그로 처리한다.
 
-## Categorical Encoding
+## 범주형 처리
 
-- CatBoost receives categorical columns directly.
-- LightGBM receives integer-encoded categorical values from train-fitted maps.
-- `tm_mapping_confidence_bucket` is treated as categorical.
+- CatBoost는 범주형 컬럼을 자체 범주형 입력으로 받는다.
+- LightGBM은 학습 데이터에서 만든 범주 매핑으로 범주형 값을 정수 인코딩한다.
+- 학습 때 보지 못한 LightGBM 범주는 `-1`로 처리한다.
+- `tm_mapping_confidence_bucket`은 Trackman 범주형 컬럼으로 추가한다.
 
-## Numeric Scaling
+## 수치형 처리
 
-No global numeric scaling is applied for CatBoost or LightGBM. Tree models use raw numeric magnitudes.
+CatBoost와 LightGBM 모두 트리 기반 모델이므로 별도의 전체 수치 스케일링은 적용하지 않았다. 수치형 값은 원래 크기를 유지한다.
 
-## ID Handling
+## ID 처리 방식
 
-- Raw `pitcher_id` and `batter_id` are dropped from the final v5-2 matrix.
-- Team IDs are kept as categorical context.
-- Pitcher identity is represented indirectly through official `asof_*` history and Trackman summary mapping.
+- 최종 v5-2 피처 행렬에서는 원본 `pitcher_id`, `batter_id`를 제거했다.
+- 팀 ID는 범주형 맥락 정보로 유지했다.
+- 투수 정보는 공식 `asof_*` 이력과 Trackman 이전 시즌 요약으로 반영했다.
 
-## Rare Categories
+## 희소 범주 처리
 
-The final v5-2 model does not use low-frequency raw pitcher/batter ID bucketing because raw pitcher/batter IDs are removed. Unknown LightGBM categories are mapped to `-1`.
+v5-2 최종 모델은 원본 `pitcher_id`, `batter_id`를 쓰지 않으므로 투수/타자 원본 ID 희소 범주 묶기는 사용하지 않는다. LightGBM의 미지 범주는 `-1`로 대체 처리한다.
 
-## Schema Alignment
+## train/test 컬럼 순서 정렬
 
-`script.py` checks that test columns match saved `input_columns`. It then selects saved feature columns in the exact order expected by each model component.
+`script.py`는 test 입력 컬럼이 저장된 `input_columns`와 일치하는지 검사한다. 이후 각 모델 구성 요소가 저장한 `feature_columns` 순서대로 피처 행렬을 재정렬한다.
 
-## Column-Missing Protection
+## 컬럼 누락 방지
 
-The inference script raises an error if required input columns are missing or if sample/test row IDs do not match.
+추론 스크립트는 필수 입력 컬럼이 없거나 `sample_submission.csv`와 test의 `row_id`가 맞지 않으면 오류를 발생시킨다. 이를 통해 평가 서버에서 잘못된 입력 구조로 조용히 예측하는 문제를 막는다.

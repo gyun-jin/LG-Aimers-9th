@@ -107,7 +107,7 @@ data_description.md : 데이터 설명서
 | `asof_pitcher_breaking_rate` | 해당 투구 직전까지 해당 투수의 breaking 계열 사용 비율입니다. |
 | `asof_pitcher_offspeed_rate` | 해당 투구 직전까지 해당 투수의 offspeed 계열 사용 비율입니다. |
 
-※ 표본 수가 0인 경우 일부 rate 컬럼은 결측값일 수 있습니다. 이런 cold-start 상황의 결측 처리, smoothing, fallback 전략은 참가자가 자유롭게 설계할 수 있습니다.
+※ 표본 수가 0인 경우 일부 비율 컬럼은 결측값일 수 있습니다. 이런 초기 이력 부족 상황의 결측 처리, 완화, 대체 전략은 참가자가 자유롭게 설계할 수 있습니다.
 
 ### 2) 학습 정답 데이터: `train.csv`의 `control_success`
 
@@ -117,7 +117,7 @@ data_description.md : 데이터 설명서
 | --- | --- |
 | `control_success` | 예측 대상입니다. `1`은 제구 성공, `0`은 제구 실패를 의미합니다. |
 
-`control_success`는 운영 기준에 따라 산출된 제구 성공 여부입니다. Target 산출에 사용되는 현재 투구의 사후 정보는 입력 피처로 제공되지 않습니다.
+`control_success`는 운영 기준에 따라 산출된 제구 성공 여부입니다. 정답값 산출에 사용되는 현재 투구의 사후 정보는 입력 피처로 제공되지 않습니다.
 
 ### 3) 과거 Trackman 로그: `trackman_history.csv`
 
@@ -175,8 +175,8 @@ data_description.md : 데이터 설명서
 
 - `test.csv` 내부 행들을 이용한 선수별, 팀별, 월별 누적 통계
 - `test.csv` 내부 빈도값 또는 분포 통계
-- `test.csv` 내부 target encoding
-- `test.csv` 행 순서 기반 rolling 또는 expanding feature
+- `test.csv` 내부 정답값 인코딩
+- `test.csv` 행 순서 기반 누적 또는 확장 피처
 - 평가 데이터 전체를 보고 만든 사후 보정값
 
 운영 측에서 제공한 `asof_*` 컬럼은 각 행의 투구 직전 시점까지의 과거 기록만으로 계산된 공식 입력 피처이므로 사용할 수 있습니다.
@@ -191,6 +191,6 @@ data_description.md : 데이터 설명서
 - 현재 투구의 실제 구종
 - 현재 투구의 Trackman 측정값
 - 2025년 Trackman 데이터
-- 평가 데이터 내부의 다른 행을 이용해 만든 누적, 빈도, 분포, rolling, target encoding 피처
+- 평가 데이터 내부의 다른 행을 이용해 만든 누적, 빈도, 분포, 순차 누적, 정답값 인코딩 피처
 
 제공된 `train.csv`, 평가 환경의 `test.csv`, 2019~2024년 `trackman_history.csv`, 그리고 대회 규칙상 허용되는 외부 데이터만 사용할 수 있습니다.
