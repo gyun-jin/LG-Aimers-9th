@@ -1,0 +1,1228 @@
+{
+  "settings": {
+    "folds": [
+      2022,
+      2023,
+      2024
+    ],
+    "train_sample": 180000,
+    "valid_sample": 70000,
+    "cat_weight": 0.8,
+    "lgb_weight": 0.2
+  },
+  "references": {
+    "v5_mean_brier": 0.2471707,
+    "v5_worst_brier": 0.24979486,
+    "v5_folds": [
+      0.24342932,
+      0.24979486,
+      0.24828793
+    ]
+  },
+  "feature_sets": {
+    "v5_no_trackman_recheck": [],
+    "tm_metadata_only": [
+      "tm_has_mapping",
+      "tm_has_pitcher_history",
+      "tm_is_low_history",
+      "tm_is_rookie_or_no_history",
+      "tm_hist_pitch_count",
+      "tm_hist_game_count",
+      "tm_hist_season_count",
+      "tm_mapping_exact_game_count",
+      "tm_mapping_margin",
+      "tm_mapping_ratio",
+      "tm_mapping_n_candidates",
+      "tm_mapping_confidence",
+      "tm_mapping_confidence_bucket",
+      "tm_mapping_is_high_confidence",
+      "tm_mapping_selected"
+    ],
+    "tm_metadata_pitchmix": [
+      "tm_has_mapping",
+      "tm_has_pitcher_history",
+      "tm_is_low_history",
+      "tm_is_rookie_or_no_history",
+      "tm_hist_pitch_count",
+      "tm_hist_game_count",
+      "tm_hist_season_count",
+      "tm_mapping_exact_game_count",
+      "tm_mapping_margin",
+      "tm_mapping_ratio",
+      "tm_mapping_n_candidates",
+      "tm_mapping_confidence",
+      "tm_mapping_confidence_bucket",
+      "tm_mapping_is_high_confidence",
+      "tm_mapping_selected",
+      "tm_hist_pitch_group_fastball_shrunk",
+      "tm_hist_pitch_group_breaking_shrunk",
+      "tm_hist_pitch_group_offspeed_shrunk",
+      "tm_hist_pitch_type_entropy"
+    ],
+    "tm_metadata_physical_core": [
+      "tm_has_mapping",
+      "tm_has_pitcher_history",
+      "tm_is_low_history",
+      "tm_is_rookie_or_no_history",
+      "tm_hist_pitch_count",
+      "tm_hist_game_count",
+      "tm_hist_season_count",
+      "tm_mapping_exact_game_count",
+      "tm_mapping_margin",
+      "tm_mapping_ratio",
+      "tm_mapping_n_candidates",
+      "tm_mapping_confidence",
+      "tm_mapping_confidence_bucket",
+      "tm_mapping_is_high_confidence",
+      "tm_mapping_selected",
+      "tm_hist_release_speed_mean_shrunk",
+      "tm_hist_release_speed_std_shrunk",
+      "tm_hist_spin_rate_mean_shrunk",
+      "tm_hist_spin_rate_std_shrunk",
+      "tm_hist_release_pos_x_mean_shrunk",
+      "tm_hist_release_pos_x_std_shrunk",
+      "tm_hist_release_pos_z_mean_shrunk",
+      "tm_hist_release_pos_z_std_shrunk",
+      "tm_hist_extension_mean_shrunk",
+      "tm_hist_extension_std_shrunk"
+    ],
+    "tm_metadata_physical_pitchmix": [
+      "tm_has_mapping",
+      "tm_has_pitcher_history",
+      "tm_is_low_history",
+      "tm_is_rookie_or_no_history",
+      "tm_hist_pitch_count",
+      "tm_hist_game_count",
+      "tm_hist_season_count",
+      "tm_mapping_exact_game_count",
+      "tm_mapping_margin",
+      "tm_mapping_ratio",
+      "tm_mapping_n_candidates",
+      "tm_mapping_confidence",
+      "tm_mapping_confidence_bucket",
+      "tm_mapping_is_high_confidence",
+      "tm_mapping_selected",
+      "tm_hist_release_speed_mean_shrunk",
+      "tm_hist_release_speed_std_shrunk",
+      "tm_hist_spin_rate_mean_shrunk",
+      "tm_hist_spin_rate_std_shrunk",
+      "tm_hist_release_pos_x_mean_shrunk",
+      "tm_hist_release_pos_x_std_shrunk",
+      "tm_hist_release_pos_z_mean_shrunk",
+      "tm_hist_release_pos_z_std_shrunk",
+      "tm_hist_extension_mean_shrunk",
+      "tm_hist_extension_std_shrunk",
+      "tm_hist_pitch_group_fastball_shrunk",
+      "tm_hist_pitch_group_breaking_shrunk",
+      "tm_hist_pitch_group_offspeed_shrunk",
+      "tm_hist_pitch_type_entropy"
+    ]
+  },
+  "raw_candidates": {
+    "v5_no_trackman_recheck": {
+      "folds": [
+        {
+          "brier": 0.2433708687161007,
+          "log_loss": 0.679544945502907,
+          "auc": 0.578055592230902,
+          "mean_pred": 0.5304126837973919,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006795732345952835
+        },
+        {
+          "brier": 0.24985812528004925,
+          "log_loss": 0.6928683859587289,
+          "auc": 0.5296851460813741,
+          "mean_pred": 0.5055900809253518,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.02207331897371785
+        },
+        {
+          "brier": 0.24827615846918577,
+          "log_loss": 0.6896868488088502,
+          "auc": 0.5433626639474559,
+          "mean_pred": 0.4934238286500575,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.00810568026988293
+        }
+      ],
+      "mean_brier": 0.24716838415511191,
+      "worst_brier": 0.24985812528004925,
+      "mean_metrics": {
+        "brier": 0.24716838415511191,
+        "log_loss": 0.6873667267568287,
+        "auc": 0.5503678007532439,
+        "mean_pred": 0.5098088644576003,
+        "mean_target": 0.5046428571428571,
+        "calibration_error": 0.012324910529851206
+      }
+    },
+    "tm_metadata_only": {
+      "folds": [
+        {
+          "brier": 0.2432920319513646,
+          "log_loss": 0.6793791923606706,
+          "auc": 0.5783739714500126,
+          "mean_pred": 0.5301720806539263,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.0064775155578252015
+        },
+        {
+          "brier": 0.249889065849852,
+          "log_loss": 0.6929303477420329,
+          "auc": 0.5285440948629946,
+          "mean_pred": 0.5055101675429794,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.02205804747249641
+        },
+        {
+          "brier": 0.24817066785913017,
+          "log_loss": 0.6894745200314725,
+          "auc": 0.5447569049139895,
+          "mean_pred": 0.49295113797459955,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.009456404454134764
+        }
+      ],
+      "mean_brier": 0.2471172552201156,
+      "worst_brier": 0.249889065849852,
+      "mean_metrics": {
+        "brier": 0.2471172552201156,
+        "log_loss": 0.6872613533780587,
+        "auc": 0.5505583237423323,
+        "mean_pred": 0.5095444620571684,
+        "mean_target": 0.5046428571428571,
+        "calibration_error": 0.01266398916148546
+      }
+    },
+    "tm_metadata_pitchmix": {
+      "folds": [
+        {
+          "brier": 0.2433321517968322,
+          "log_loss": 0.6794597612790572,
+          "auc": 0.5779870357015873,
+          "mean_pred": 0.5306896021015441,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006359415797881155
+        },
+        {
+          "brier": 0.24982309392384158,
+          "log_loss": 0.6927981872831879,
+          "auc": 0.53127516802356,
+          "mean_pred": 0.5053709348698256,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.022516670225801953
+        },
+        {
+          "brier": 0.2481967077386457,
+          "log_loss": 0.6895272600833279,
+          "auc": 0.5445975467486703,
+          "mean_pred": 0.49240113107218775,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.00794407348592926
+        }
+      ],
+      "mean_brier": 0.24711731781977317,
+      "worst_brier": 0.24982309392384158,
+      "mean_metrics": {
+        "brier": 0.24711731781977317,
+        "log_loss": 0.6872617362151909,
+        "auc": 0.5512865834912725,
+        "mean_pred": 0.5094872226811858,
+        "mean_target": 0.5046428571428571,
+        "calibration_error": 0.012273386503204121
+      }
+    },
+    "tm_metadata_physical_core": {
+      "folds": [
+        {
+          "brier": 0.24330664804504976,
+          "log_loss": 0.6794200282289201,
+          "auc": 0.57877117036042,
+          "mean_pred": 0.5297935631207632,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006551891252564827
+        },
+        {
+          "brier": 0.24976862889745244,
+          "log_loss": 0.692686713039199,
+          "auc": 0.528740052485245,
+          "mean_pred": 0.5039626741707673,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.01516843850238445
+        },
+        {
+          "brier": 0.24828960827544158,
+          "log_loss": 0.6897146535274666,
+          "auc": 0.5434827753257133,
+          "mean_pred": 0.49317686990741194,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.008653750214731207
+        }
+      ],
+      "mean_brier": 0.24712162840598126,
+      "worst_brier": 0.24976862889745244,
+      "mean_metrics": {
+        "brier": 0.24712162840598126,
+        "log_loss": 0.6872737982651952,
+        "auc": 0.5503313327237929,
+        "mean_pred": 0.5089777023996475,
+        "mean_target": 0.5046428571428571,
+        "calibration_error": 0.010124693323226828
+      }
+    },
+    "tm_metadata_physical_pitchmix": {
+      "folds": [
+        {
+          "brier": 0.24334193451592936,
+          "log_loss": 0.6794916076267529,
+          "auc": 0.5784919001171724,
+          "mean_pred": 0.5293249893809017,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006724239131424932
+        },
+        {
+          "brier": 0.2497594449127202,
+          "log_loss": 0.6926676894354019,
+          "auc": 0.5291450698571967,
+          "mean_pred": 0.5034901309866411,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.016245457171301384
+        },
+        {
+          "brier": 0.24823080302970885,
+          "log_loss": 0.689595802180135,
+          "auc": 0.5437420258618908,
+          "mean_pred": 0.4924598367024255,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.008039920129467725
+        }
+      ],
+      "mean_brier": 0.24711072748611948,
+      "worst_brier": 0.2497594449127202,
+      "mean_metrics": {
+        "brier": 0.24711072748611948,
+        "log_loss": 0.68725169974743,
+        "auc": 0.5504596652787533,
+        "mean_pred": 0.5084249856899895,
+        "mean_target": 0.5046428571428571,
+        "calibration_error": 0.010336538810731348
+      }
+    }
+  },
+  "calibrations": {
+    "v5_no_trackman_recheck": {
+      "none": {
+        "folds": [
+          {
+            "brier": 0.2433708687161007,
+            "log_loss": 0.679544945502907,
+            "auc": 0.578055592230902,
+            "mean_pred": 0.5304126837973919,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006795732345952835
+          },
+          {
+            "brier": 0.24985812528004925,
+            "log_loss": 0.6928683859587289,
+            "auc": 0.5296851460813741,
+            "mean_pred": 0.5055900809253518,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.02207331897371785
+          },
+          {
+            "brier": 0.24827615846918577,
+            "log_loss": 0.6896868488088502,
+            "auc": 0.5433626639474559,
+            "mean_pred": 0.4934238286500575,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.00810568026988293
+          }
+        ],
+        "mean_brier": 0.24716838415511191,
+        "worst_brier": 0.24985812528004925
+      },
+      "platt": {
+        "folds": [
+          {
+            "brier": 0.2433708687161007,
+            "log_loss": 0.679544945502907,
+            "auc": 0.578055592230902,
+            "mean_pred": 0.5304126837973919,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006795732345952835
+          },
+          {
+            "brier": 0.2498565318909943,
+            "log_loss": 0.6928660779900104,
+            "auc": 0.5296851460813741,
+            "mean_pred": 0.5019352234288971,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.01931966814769264
+          },
+          {
+            "brier": 0.24824128631977813,
+            "log_loss": 0.6896176395311512,
+            "auc": 0.5433626639474559,
+            "mean_pred": 0.48710844298761086,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.005210324236199733
+          }
+        ],
+        "mean_brier": 0.2471562289756244,
+        "worst_brier": 0.2498565318909943
+      },
+      "isotonic": {
+        "folds": [
+          {
+            "brier": 0.2433708687161007,
+            "log_loss": 0.679544945502907,
+            "auc": 0.578055592230902,
+            "mean_pred": 0.5304126837973919,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006795732345952835
+          },
+          {
+            "brier": 0.249710533711819,
+            "log_loss": 0.6925698539474325,
+            "auc": 0.527208348479692,
+            "mean_pred": 0.5018705806280631,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.0031562949137774227
+          },
+          {
+            "brier": 0.2485423072099181,
+            "log_loss": 0.6923806004290316,
+            "auc": 0.5427864504240707,
+            "mean_pred": 0.48253834758260294,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.012018637978959301
+          }
+        ],
+        "mean_brier": 0.24720790321261257,
+        "worst_brier": 0.249710533711819
+      },
+      "prior_correction": {
+        "folds": [
+          {
+            "brier": 0.2433708687161007,
+            "log_loss": 0.679544945502907,
+            "auc": 0.578055592230902,
+            "mean_pred": 0.5304126837973919,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006795732345952835
+          },
+          {
+            "brier": 0.24985105176479733,
+            "log_loss": 0.692854034618985,
+            "auc": 0.5296851460813741,
+            "mean_pred": 0.5050477678726804,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.021830498745845604
+          },
+          {
+            "brier": 0.24822995252227098,
+            "log_loss": 0.6895942241880042,
+            "auc": 0.5433626639474559,
+            "mean_pred": 0.48973702371953926,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.005867521012900283
+          }
+        ],
+        "mean_brier": 0.24715062433438964,
+        "worst_brier": 0.24985105176479733
+      }
+    },
+    "tm_metadata_only": {
+      "none": {
+        "folds": [
+          {
+            "brier": 0.2432920319513646,
+            "log_loss": 0.6793791923606706,
+            "auc": 0.5783739714500126,
+            "mean_pred": 0.5301720806539263,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.0064775155578252015
+          },
+          {
+            "brier": 0.249889065849852,
+            "log_loss": 0.6929303477420329,
+            "auc": 0.5285440948629946,
+            "mean_pred": 0.5055101675429794,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.02205804747249641
+          },
+          {
+            "brier": 0.24817066785913017,
+            "log_loss": 0.6894745200314725,
+            "auc": 0.5447569049139895,
+            "mean_pred": 0.49295113797459955,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.009456404454134764
+          }
+        ],
+        "mean_brier": 0.2471172552201156,
+        "worst_brier": 0.249889065849852
+      },
+      "platt": {
+        "folds": [
+          {
+            "brier": 0.2432920319513646,
+            "log_loss": 0.6793791923606706,
+            "auc": 0.5783739714500126,
+            "mean_pred": 0.5301720806539263,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.0064775155578252015
+          },
+          {
+            "brier": 0.24989224694450407,
+            "log_loss": 0.6929376653818748,
+            "auc": 0.5285440948629946,
+            "mean_pred": 0.5024292180656922,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.021592926394875547
+          },
+          {
+            "brier": 0.2481175292723047,
+            "log_loss": 0.6893674500119696,
+            "auc": 0.5447569049139895,
+            "mean_pred": 0.48709293988572006,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.006230358525608792
+          }
+        ],
+        "mean_brier": 0.24710060272272447,
+        "worst_brier": 0.24989224694450407
+      },
+      "isotonic": {
+        "folds": [
+          {
+            "brier": 0.2432920319513646,
+            "log_loss": 0.6793791923606706,
+            "auc": 0.5783739714500126,
+            "mean_pred": 0.5301720806539263,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.0064775155578252015
+          },
+          {
+            "brier": 0.2497800787819666,
+            "log_loss": 0.6927107117048,
+            "auc": 0.5253950103670074,
+            "mean_pred": 0.506824931299754,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.014533112374704242
+          },
+          {
+            "brier": 0.24846772108531368,
+            "log_loss": 0.690086759280758,
+            "auc": 0.5430024556350923,
+            "mean_pred": 0.4831723986562035,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.008693027653506
+          }
+        ],
+        "mean_brier": 0.24717994393954826,
+        "worst_brier": 0.2497800787819666
+      },
+      "prior_correction": {
+        "folds": [
+          {
+            "brier": 0.2432920319513646,
+            "log_loss": 0.6793791923606706,
+            "auc": 0.5783739714500126,
+            "mean_pred": 0.5301720806539263,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.0064775155578252015
+          },
+          {
+            "brier": 0.24988511171202768,
+            "log_loss": 0.6929223271695618,
+            "auc": 0.5285440948629946,
+            "mean_pred": 0.5052089419394332,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.021398962577437175
+          },
+          {
+            "brier": 0.24812929200571027,
+            "log_loss": 0.6893914928504812,
+            "auc": 0.5447569049139895,
+            "mean_pred": 0.48942227310145214,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.00627548579999819
+          }
+        ],
+        "mean_brier": 0.2471021452230342,
+        "worst_brier": 0.24988511171202768
+      }
+    },
+    "tm_metadata_pitchmix": {
+      "none": {
+        "folds": [
+          {
+            "brier": 0.2433321517968322,
+            "log_loss": 0.6794597612790572,
+            "auc": 0.5779870357015873,
+            "mean_pred": 0.5306896021015441,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006359415797881155
+          },
+          {
+            "brier": 0.24982309392384158,
+            "log_loss": 0.6927981872831879,
+            "auc": 0.53127516802356,
+            "mean_pred": 0.5053709348698256,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.022516670225801953
+          },
+          {
+            "brier": 0.2481967077386457,
+            "log_loss": 0.6895272600833279,
+            "auc": 0.5445975467486703,
+            "mean_pred": 0.49240113107218775,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.00794407348592926
+          }
+        ],
+        "mean_brier": 0.24711731781977317,
+        "worst_brier": 0.24982309392384158
+      },
+      "platt": {
+        "folds": [
+          {
+            "brier": 0.2433321517968322,
+            "log_loss": 0.6794597612790572,
+            "auc": 0.5779870357015873,
+            "mean_pred": 0.5306896021015441,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006359415797881155
+          },
+          {
+            "brier": 0.24981189106631427,
+            "log_loss": 0.6927761969923504,
+            "auc": 0.53127516802356,
+            "mean_pred": 0.5022119143670021,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.019806511286969544
+          },
+          {
+            "brier": 0.2481630295447042,
+            "log_loss": 0.6894599344183954,
+            "auc": 0.5445975467486703,
+            "mean_pred": 0.48662014872704107,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.006436149336601243
+          }
+        ],
+        "mean_brier": 0.24710235746928358,
+        "worst_brier": 0.24981189106631427
+      },
+      "isotonic": {
+        "folds": [
+          {
+            "brier": 0.2433321517968322,
+            "log_loss": 0.6794597612790572,
+            "auc": 0.5779870357015873,
+            "mean_pred": 0.5306896021015441,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006359415797881155
+          },
+          {
+            "brier": 0.24973477318046133,
+            "log_loss": 0.6926188131096026,
+            "auc": 0.5282385736591402,
+            "mean_pred": 0.5059645388547339,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.017425283746287056
+          },
+          {
+            "brier": 0.2485186917404058,
+            "log_loss": 0.6911816679112613,
+            "auc": 0.5431023953936109,
+            "mean_pred": 0.4817600032573008,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.012075257075081293
+          }
+        ],
+        "mean_brier": 0.24719520557256644,
+        "worst_brier": 0.24973477318046133
+      },
+      "prior_correction": {
+        "folds": [
+          {
+            "brier": 0.2433321517968322,
+            "log_loss": 0.6794597612790572,
+            "auc": 0.5779870357015873,
+            "mean_pred": 0.5306896021015441,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006359415797881155
+          },
+          {
+            "brier": 0.24981298577287953,
+            "log_loss": 0.6927776683590012,
+            "auc": 0.53127516802356,
+            "mean_pred": 0.5045511086553842,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.02133834938113504
+          },
+          {
+            "brier": 0.24815793180472887,
+            "log_loss": 0.6894494281940591,
+            "auc": 0.5445975467486703,
+            "mean_pred": 0.4886863694613466,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.005641574434717881
+          }
+        ],
+        "mean_brier": 0.24710102312481352,
+        "worst_brier": 0.24981298577287953
+      }
+    },
+    "tm_metadata_physical_core": {
+      "none": {
+        "folds": [
+          {
+            "brier": 0.24330664804504976,
+            "log_loss": 0.6794200282289201,
+            "auc": 0.57877117036042,
+            "mean_pred": 0.5297935631207632,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006551891252564827
+          },
+          {
+            "brier": 0.24976862889745244,
+            "log_loss": 0.692686713039199,
+            "auc": 0.528740052485245,
+            "mean_pred": 0.5039626741707673,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.01516843850238445
+          },
+          {
+            "brier": 0.24828960827544158,
+            "log_loss": 0.6897146535274666,
+            "auc": 0.5434827753257133,
+            "mean_pred": 0.49317686990741194,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.008653750214731207
+          }
+        ],
+        "mean_brier": 0.24712162840598126,
+        "worst_brier": 0.24976862889745244
+      },
+      "platt": {
+        "folds": [
+          {
+            "brier": 0.24330664804504976,
+            "log_loss": 0.6794200282289201,
+            "auc": 0.57877117036042,
+            "mean_pred": 0.5297935631207632,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006551891252564827
+          },
+          {
+            "brier": 0.2497563553999515,
+            "log_loss": 0.6926624910173838,
+            "auc": 0.528740052485245,
+            "mean_pred": 0.5006094915220964,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.012964061010586815
+          },
+          {
+            "brier": 0.2482646994060235,
+            "log_loss": 0.6896654348177597,
+            "auc": 0.5434827753257133,
+            "mean_pred": 0.48754696876625636,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.00606499739012958
+          }
+        ],
+        "mean_brier": 0.24710923428367493,
+        "worst_brier": 0.2497563553999515
+      },
+      "isotonic": {
+        "folds": [
+          {
+            "brier": 0.24330664804504976,
+            "log_loss": 0.6794200282289201,
+            "auc": 0.57877117036042,
+            "mean_pred": 0.5297935631207632,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006551891252564827
+          },
+          {
+            "brier": 0.24966098466134598,
+            "log_loss": 0.6924700090870659,
+            "auc": 0.5262428433200252,
+            "mean_pred": 0.5055158539091155,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.0117153196667113
+          },
+          {
+            "brier": 0.24853196736623265,
+            "log_loss": 0.6902123127868389,
+            "auc": 0.5421569078082318,
+            "mean_pred": 0.48159794821146645,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.013893508197309517
+          }
+        ],
+        "mean_brier": 0.2471665333575428,
+        "worst_brier": 0.24966098466134598
+      },
+      "prior_correction": {
+        "folds": [
+          {
+            "brier": 0.24330664804504976,
+            "log_loss": 0.6794200282289201,
+            "auc": 0.57877117036042,
+            "mean_pred": 0.5297935631207632,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006551891252564827
+          },
+          {
+            "brier": 0.24976944622398817,
+            "log_loss": 0.6926883657494557,
+            "auc": 0.528740052485245,
+            "mean_pred": 0.5040407204450382,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.014999958888633532
+          },
+          {
+            "brier": 0.24825579526923985,
+            "log_loss": 0.6896468675247098,
+            "auc": 0.5434827753257133,
+            "mean_pred": 0.49060623467099795,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.0063063074483473425
+          }
+        ],
+        "mean_brier": 0.24711062984609258,
+        "worst_brier": 0.24976944622398817
+      }
+    },
+    "tm_metadata_physical_pitchmix": {
+      "none": {
+        "folds": [
+          {
+            "brier": 0.24334193451592936,
+            "log_loss": 0.6794916076267529,
+            "auc": 0.5784919001171724,
+            "mean_pred": 0.5293249893809017,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006724239131424932
+          },
+          {
+            "brier": 0.2497594449127202,
+            "log_loss": 0.6926676894354019,
+            "auc": 0.5291450698571967,
+            "mean_pred": 0.5034901309866411,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.016245457171301384
+          },
+          {
+            "brier": 0.24823080302970885,
+            "log_loss": 0.689595802180135,
+            "auc": 0.5437420258618908,
+            "mean_pred": 0.4924598367024255,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.008039920129467725
+          }
+        ],
+        "mean_brier": 0.24711072748611948,
+        "worst_brier": 0.2497594449127202
+      },
+      "platt": {
+        "folds": [
+          {
+            "brier": 0.24334193451592936,
+            "log_loss": 0.6794916076267529,
+            "auc": 0.5784919001171724,
+            "mean_pred": 0.5293249893809017,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006724239131424932
+          },
+          {
+            "brier": 0.2497443297393062,
+            "log_loss": 0.692637750006168,
+            "auc": 0.5291450698571967,
+            "mean_pred": 0.5006171423182927,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.013617208838485426
+          },
+          {
+            "brier": 0.24821738040737695,
+            "log_loss": 0.6895697164262888,
+            "auc": 0.5437420258618908,
+            "mean_pred": 0.48713770410065543,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.005619953132577986
+          }
+        ],
+        "mean_brier": 0.24710121488753747,
+        "worst_brier": 0.2497443297393062
+      },
+      "isotonic": {
+        "folds": [
+          {
+            "brier": 0.24334193451592936,
+            "log_loss": 0.6794916076267529,
+            "auc": 0.5784919001171724,
+            "mean_pred": 0.5293249893809017,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006724239131424932
+          },
+          {
+            "brier": 0.24965201374443657,
+            "log_loss": 0.6924517405573842,
+            "auc": 0.5252334472578961,
+            "mean_pred": 0.5038312591679835,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.010909073014581114
+          },
+          {
+            "brier": 0.2483820016760565,
+            "log_loss": 0.6899047669293806,
+            "auc": 0.543074113947734,
+            "mean_pred": 0.48394788515260195,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.010922947317373947
+          }
+        ],
+        "mean_brier": 0.24712531664547413,
+        "worst_brier": 0.24965201374443657
+      },
+      "prior_correction": {
+        "folds": [
+          {
+            "brier": 0.24334193451592936,
+            "log_loss": 0.6794916076267529,
+            "auc": 0.5784919001171724,
+            "mean_pred": 0.5293249893809017,
+            "mean_target": 0.5298714285714285,
+            "calibration_error": 0.006724239131424932
+          },
+          {
+            "brier": 0.24976493386821172,
+            "log_loss": 0.6926787657380088,
+            "auc": 0.5291450698571967,
+            "mean_pred": 0.5040379046529019,
+            "mean_target": 0.4987142857142857,
+            "calibration_error": 0.01668877510451472
+          },
+          {
+            "brier": 0.24820519749528652,
+            "log_loss": 0.6895444440483463,
+            "auc": 0.5437420258618908,
+            "mean_pred": 0.49035757247246925,
+            "mean_target": 0.48534285714285713,
+            "calibration_error": 0.006180761493700152
+          }
+        ],
+        "mean_brier": 0.2471040219598092,
+        "worst_brier": 0.24976493386821172
+      }
+    }
+  },
+  "calibrated_candidates": {
+    "v5_no_trackman_recheck": {
+      "folds": [
+        {
+          "brier": 0.2433708687161007,
+          "log_loss": 0.679544945502907,
+          "auc": 0.578055592230902,
+          "mean_pred": 0.5304126837973919,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006795732345952835
+        },
+        {
+          "brier": 0.24985105176479733,
+          "log_loss": 0.692854034618985,
+          "auc": 0.5296851460813741,
+          "mean_pred": 0.5050477678726804,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.021830498745845604
+        },
+        {
+          "brier": 0.24822995252227098,
+          "log_loss": 0.6895942241880042,
+          "auc": 0.5433626639474559,
+          "mean_pred": 0.48973702371953926,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.005867521012900283
+        }
+      ],
+      "mean_brier": 0.24715062433438964,
+      "worst_brier": 0.24985105176479733,
+      "selected_calibration": "prior_correction",
+      "raw_mean_brier": 0.24716838415511191,
+      "raw_worst_brier": 0.24985812528004925
+    },
+    "tm_metadata_only": {
+      "folds": [
+        {
+          "brier": 0.2432920319513646,
+          "log_loss": 0.6793791923606706,
+          "auc": 0.5783739714500126,
+          "mean_pred": 0.5301720806539263,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.0064775155578252015
+        },
+        {
+          "brier": 0.24989224694450407,
+          "log_loss": 0.6929376653818748,
+          "auc": 0.5285440948629946,
+          "mean_pred": 0.5024292180656922,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.021592926394875547
+        },
+        {
+          "brier": 0.2481175292723047,
+          "log_loss": 0.6893674500119696,
+          "auc": 0.5447569049139895,
+          "mean_pred": 0.48709293988572006,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.006230358525608792
+        }
+      ],
+      "mean_brier": 0.24710060272272447,
+      "worst_brier": 0.24989224694450407,
+      "selected_calibration": "platt",
+      "raw_mean_brier": 0.2471172552201156,
+      "raw_worst_brier": 0.249889065849852
+    },
+    "tm_metadata_pitchmix": {
+      "folds": [
+        {
+          "brier": 0.2433321517968322,
+          "log_loss": 0.6794597612790572,
+          "auc": 0.5779870357015873,
+          "mean_pred": 0.5306896021015441,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006359415797881155
+        },
+        {
+          "brier": 0.24981298577287953,
+          "log_loss": 0.6927776683590012,
+          "auc": 0.53127516802356,
+          "mean_pred": 0.5045511086553842,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.02133834938113504
+        },
+        {
+          "brier": 0.24815793180472887,
+          "log_loss": 0.6894494281940591,
+          "auc": 0.5445975467486703,
+          "mean_pred": 0.4886863694613466,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.005641574434717881
+        }
+      ],
+      "mean_brier": 0.24710102312481352,
+      "worst_brier": 0.24981298577287953,
+      "selected_calibration": "prior_correction",
+      "raw_mean_brier": 0.24711731781977317,
+      "raw_worst_brier": 0.24982309392384158
+    },
+    "tm_metadata_physical_core": {
+      "folds": [
+        {
+          "brier": 0.24330664804504976,
+          "log_loss": 0.6794200282289201,
+          "auc": 0.57877117036042,
+          "mean_pred": 0.5297935631207632,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006551891252564827
+        },
+        {
+          "brier": 0.2497563553999515,
+          "log_loss": 0.6926624910173838,
+          "auc": 0.528740052485245,
+          "mean_pred": 0.5006094915220964,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.012964061010586815
+        },
+        {
+          "brier": 0.2482646994060235,
+          "log_loss": 0.6896654348177597,
+          "auc": 0.5434827753257133,
+          "mean_pred": 0.48754696876625636,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.00606499739012958
+        }
+      ],
+      "mean_brier": 0.24710923428367493,
+      "worst_brier": 0.2497563553999515,
+      "selected_calibration": "platt",
+      "raw_mean_brier": 0.24712162840598126,
+      "raw_worst_brier": 0.24976862889745244
+    },
+    "tm_metadata_physical_pitchmix": {
+      "folds": [
+        {
+          "brier": 0.24334193451592936,
+          "log_loss": 0.6794916076267529,
+          "auc": 0.5784919001171724,
+          "mean_pred": 0.5293249893809017,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006724239131424932
+        },
+        {
+          "brier": 0.2497443297393062,
+          "log_loss": 0.692637750006168,
+          "auc": 0.5291450698571967,
+          "mean_pred": 0.5006171423182927,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.013617208838485426
+        },
+        {
+          "brier": 0.24821738040737695,
+          "log_loss": 0.6895697164262888,
+          "auc": 0.5437420258618908,
+          "mean_pred": 0.48713770410065543,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.005619953132577986
+        }
+      ],
+      "mean_brier": 0.24710121488753747,
+      "worst_brier": 0.2497443297393062,
+      "selected_calibration": "platt",
+      "raw_mean_brier": 0.24711072748611948,
+      "raw_worst_brier": 0.2497594449127202
+    }
+  },
+  "best_candidate": "tm_metadata_only",
+  "best_metrics": {
+    "folds": [
+      {
+        "brier": 0.2432920319513646,
+        "log_loss": 0.6793791923606706,
+        "auc": 0.5783739714500126,
+        "mean_pred": 0.5301720806539263,
+        "mean_target": 0.5298714285714285,
+        "calibration_error": 0.0064775155578252015
+      },
+      {
+        "brier": 0.24989224694450407,
+        "log_loss": 0.6929376653818748,
+        "auc": 0.5285440948629946,
+        "mean_pred": 0.5024292180656922,
+        "mean_target": 0.4987142857142857,
+        "calibration_error": 0.021592926394875547
+      },
+      {
+        "brier": 0.2481175292723047,
+        "log_loss": 0.6893674500119696,
+        "auc": 0.5447569049139895,
+        "mean_pred": 0.48709293988572006,
+        "mean_target": 0.48534285714285713,
+        "calibration_error": 0.006230358525608792
+      }
+    ],
+    "mean_brier": 0.24710060272272447,
+    "worst_brier": 0.24989224694450407,
+    "selected_calibration": "platt",
+    "raw_mean_brier": 0.2471172552201156,
+    "raw_worst_brier": 0.249889065849852
+  },
+  "eligible_candidates": {
+    "tm_metadata_physical_pitchmix": {
+      "folds": [
+        {
+          "brier": 0.24334193451592936,
+          "log_loss": 0.6794916076267529,
+          "auc": 0.5784919001171724,
+          "mean_pred": 0.5293249893809017,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006724239131424932
+        },
+        {
+          "brier": 0.2497443297393062,
+          "log_loss": 0.692637750006168,
+          "auc": 0.5291450698571967,
+          "mean_pred": 0.5006171423182927,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.013617208838485426
+        },
+        {
+          "brier": 0.24821738040737695,
+          "log_loss": 0.6895697164262888,
+          "auc": 0.5437420258618908,
+          "mean_pred": 0.48713770410065543,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.005619953132577986
+        }
+      ],
+      "mean_brier": 0.24710121488753747,
+      "worst_brier": 0.2497443297393062,
+      "selected_calibration": "platt",
+      "raw_mean_brier": 0.24711072748611948,
+      "raw_worst_brier": 0.2497594449127202
+    },
+    "tm_metadata_physical_core": {
+      "folds": [
+        {
+          "brier": 0.24330664804504976,
+          "log_loss": 0.6794200282289201,
+          "auc": 0.57877117036042,
+          "mean_pred": 0.5297935631207632,
+          "mean_target": 0.5298714285714285,
+          "calibration_error": 0.006551891252564827
+        },
+        {
+          "brier": 0.2497563553999515,
+          "log_loss": 0.6926624910173838,
+          "auc": 0.528740052485245,
+          "mean_pred": 0.5006094915220964,
+          "mean_target": 0.4987142857142857,
+          "calibration_error": 0.012964061010586815
+        },
+        {
+          "brier": 0.2482646994060235,
+          "log_loss": 0.6896654348177597,
+          "auc": 0.5434827753257133,
+          "mean_pred": 0.48754696876625636,
+          "mean_target": 0.48534285714285713,
+          "calibration_error": 0.00606499739012958
+        }
+      ],
+      "mean_brier": 0.24710923428367493,
+      "worst_brier": 0.2497563553999515,
+      "selected_calibration": "platt",
+      "raw_mean_brier": 0.24712162840598126,
+      "raw_worst_brier": 0.24976862889745244
+    }
+  },
+  "selected_candidate": "tm_metadata_physical_pitchmix",
+  "selected_metrics": {
+    "folds": [
+      {
+        "brier": 0.24334193451592936,
+        "log_loss": 0.6794916076267529,
+        "auc": 0.5784919001171724,
+        "mean_pred": 0.5293249893809017,
+        "mean_target": 0.5298714285714285,
+        "calibration_error": 0.006724239131424932
+      },
+      {
+        "brier": 0.2497443297393062,
+        "log_loss": 0.692637750006168,
+        "auc": 0.5291450698571967,
+        "mean_pred": 0.5006171423182927,
+        "mean_target": 0.4987142857142857,
+        "calibration_error": 0.013617208838485426
+      },
+      {
+        "brier": 0.24821738040737695,
+        "log_loss": 0.6895697164262888,
+        "auc": 0.5437420258618908,
+        "mean_pred": 0.48713770410065543,
+        "mean_target": 0.48534285714285713,
+        "calibration_error": 0.005619953132577986
+      }
+    ],
+    "mean_brier": 0.24710121488753747,
+    "worst_brier": 0.2497443297393062,
+    "selected_calibration": "platt",
+    "raw_mean_brier": 0.24711072748611948,
+    "raw_worst_brier": 0.2497594449127202
+  }
+}
