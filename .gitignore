@@ -8,4 +8,4 @@ outputs/
 .pytest_cache/
 .mypy_cache/
 .DS_Store
-test/
+test/tabiclv2-submit/model/classifier.pkl
