@@ -15,8 +15,6 @@
 - 배포용 5행 `test.csv`
 - 평가 서버에서 동일 경로/동일 스키마로 교체되는 비공개 2025 test
 
-실제 데이터 파일은 Git에 포함하지 않는다.
-
 ## 핵심 추가
 
 Current Season의 **Level + Reliability** 8개를 추가한다.
@@ -106,7 +104,5 @@ X_test = tabm_test[TABM_V1_FEATURES]
 이후 TabM preprocessing에서 numeric / binary / categorical 리스트를 각각 사용한다.
 
 ## 주의
-
-- 원본 데이터셋은 Git에 올리지 않는다.
-- 이 v1에는 TrackMan feature가 포함되지 않는다.
+- 이 v1에는 TrackMan feature가 포함되지 않았다.
 - validation은 train에서 `season < 2024` 학습, `season == 2024` 검증 기준으로 선정했다.
