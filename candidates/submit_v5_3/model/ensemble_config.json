@@ -1,0 +1,12 @@
+{
+  "selected_ensemble": "tm_metadata_physical_pitchmix",
+  "weights": {
+    "catboost": 0.8,
+    "lightgbm": 0.2
+  },
+  "calibration": "platt",
+  "trackman_strategy": "mapping_all_shrink",
+  "current_season_features": true,
+  "training_data": "/Users/park-yoonjin/Documents/LG Aimers/해커톤/hand_cleaning_analysis/train_hand_trackman_clean.csv",
+  "selection_metric": "full three-fold mean Brier compared with v5-2 reference"
+}

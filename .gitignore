@@ -16,3 +16,7 @@ data/train.csv
 data/test.csv
 data/trackman_history.csv
 train_trackman/trackman_history.csv
+hand_cleaning_analysis/train_hand_trackman_clean.csv
+candidates/**/data/train.csv
+candidates/**/data/test.csv
+candidates/**/data/trackman_history.csv
