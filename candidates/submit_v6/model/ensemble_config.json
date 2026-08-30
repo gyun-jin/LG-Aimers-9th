@@ -1,0 +1,10 @@
+{
+  "selected_ensemble": "catboost_lightgbm_xgboost",
+  "weights": {
+    "catboost": 0.65,
+    "lightgbm": 0.05,
+    "xgboost": 0.3
+  },
+  "calibration": "platt",
+  "note": "v6 = v4 config + 4 pitchmix x situation features"
+}
