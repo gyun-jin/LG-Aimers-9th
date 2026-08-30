@@ -1,0 +1,17 @@
+{
+  "exists": true,
+  "zip_test": true,
+  "members": [
+    "model/calibration_model.joblib",
+    "model/feature_schema.json",
+    "model/final_model.joblib",
+    "requirements.txt",
+    "script.py"
+  ],
+  "script_exit_code": 0,
+  "submission_exists": true,
+  "columns_ok": true,
+  "row_count": 5,
+  "finite": true,
+  "range_ok": true
+}
