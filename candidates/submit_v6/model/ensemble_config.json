@@ -1,0 +1,34 @@
+{
+  "selected_ensemble": "catboost_lightgbm_xgboost",
+  "weights": {
+    "catboost": 0.65,
+    "lightgbm": 0.05,
+    "xgboost": 0.3
+  },
+  "selection_weights_2021_2023": {
+    "catboost": 0.65,
+    "lightgbm": 0.05,
+    "xgboost": 0.3
+  },
+  "diagnostic_unconstrained_oof_weights_not_used": {
+    "lightgbm": 0.0,
+    "catboost": 0.3718451013709321,
+    "xgboost": 0.628154898629068
+  },
+  "calibration": "none_on_strict_temporal_oof_2021_2024",
+  "feature_versions": {
+    "lightgbm": 2,
+    "catboost": 1,
+    "xgboost": 2
+  },
+  "drop_columns": {
+    "lightgbm": [
+      "game_type"
+    ],
+    "catboost": [],
+    "xgboost": [
+      "game_type"
+    ]
+  },
+  "note": "robust fixed weights; CatBoost legacy layout; XGB/LGB v2 with season retained"
+}
