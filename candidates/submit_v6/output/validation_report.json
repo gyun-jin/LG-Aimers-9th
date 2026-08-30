@@ -1,5 +1,63 @@
 {
-  "val_2024_raw_brier": 0.24806944183980492,
-  "val_2024_raw_bss": 695.5311205900539,
-  "val_2024_platt_insample_brier": 0.24790146215304087
+  "validation_protocol": "robust fixed weights; calibrator fit on strict OOF 2021-2023; 2024 evaluation",
+  "selection_weights": {
+    "catboost": 0.65,
+    "lightgbm": 0.05,
+    "xgboost": 0.3
+  },
+  "diagnostic_unconstrained_oof_weights_not_used": {
+    "lightgbm": 0.0,
+    "catboost": 0.3718451013709321,
+    "xgboost": 0.628154898629068
+  },
+  "selected_calibration": "none",
+  "selection_oof_rows": 740085,
+  "selection_oof_raw_brier": 0.24705826418118707,
+  "selection_oof_platt_insample_brier_diagnostic_only": 0.24701090372748216,
+  "val_2024_rows": 253507,
+  "val_2024_raw_brier": 0.24799808767415615,
+  "val_2024_raw_bss": 724.0948464142915,
+  "val_2024_platt_brier": 0.24801209550736783,
+  "val_2024_platt_bss": 718.4873825246685,
+  "folds": [
+    {
+      "train_period": "2019-2020",
+      "validation_season": 2021,
+      "rows": 247088,
+      "selected_weight_raw_brier": 0.24582874834272006,
+      "selected_weight_raw_bss": 1244.514564320276,
+      "independent_of_weight_and_calibrator_fit": false
+    },
+    {
+      "train_period": "2019-2021",
+      "validation_season": 2022,
+      "rows": 247472,
+      "selected_weight_raw_brier": 0.2436376159314394,
+      "selected_weight_raw_bss": 2217.816662886318,
+      "independent_of_weight_and_calibrator_fit": false
+    },
+    {
+      "train_period": "2019-2022",
+      "validation_season": 2023,
+      "rows": 245525,
+      "selected_weight_raw_brier": 0.2517433808624075,
+      "selected_weight_raw_bss": 0.0,
+      "independent_of_weight_and_calibrator_fit": false
+    },
+    {
+      "train_period": "2019-2023",
+      "validation_season": 2024,
+      "rows": 253507,
+      "selected_weight_raw_brier": 0.24799808767415615,
+      "selected_weight_raw_bss": 724.0948464142915,
+      "independent_of_weight_and_calibrator_fit": true
+    }
+  ],
+  "final_oof_weights": {
+    "catboost": 0.65,
+    "lightgbm": 0.05,
+    "xgboost": 0.3
+  },
+  "final_oof_rows": 993592,
+  "final_oof_raw_brier": 0.24729805257947543
 }

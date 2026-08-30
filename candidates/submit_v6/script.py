@@ -4,6 +4,11 @@ import json
 import os
 import time
 
+# Windows에서는 pandas/scikit-learn 계열 DLL이 먼저 로드되면 LightGBM의
+# 네이티브 predict 호출이 access violation으로 종료될 수 있다. 모델을
+# 역직렬화하기 전 LightGBM 런타임을 먼저 로드해 DLL 초기화 순서를 고정한다.
+import lightgbm as _lightgbm_import_guard  # noqa: F401
+
 import joblib
 import numpy as np
 import pandas as pd
@@ -68,6 +73,10 @@ def _safe_string(series):
 
 def build_features(frame, state):
     """test 내부 통계 없이 한 행과 저장된 학습 prior만 사용한다."""
+    # feature_version이 없는 기존 모델은 저장 당시의 131개 피처를 그대로 재현한다.
+    feature_version = int(state.get("feature_version", 1))
+    legacy_layout = feature_version in (1, 3)
+    smoothed_pitchmix = feature_version >= 2
     input_columns = state["input_columns"]
     missing = [c for c in input_columns if c not in frame.columns]
     extra = [c for c in frame.columns if c not in input_columns + [ID_COL, TARGET_COL]]
@@ -117,10 +126,50 @@ def build_features(frame, state):
     x["recent_middle_vs_cumulative"] = (
         x["recent_middle_mean_1_3_5"] - x["asof_pitcher_middle_rate_smoothed"]
     )
-    for col in state["missing_columns"]:
-        x[f"{col}__missing"] = x[col].isna().astype("int8")
-    x["is_pitcher_cold_start"] = (x["asof_pitcher_n"].fillna(0) <= 0).astype("int8")
-    x["is_batter_cold_start"] = (x["asof_batter_n"].fillna(0) <= 0).astype("int8")
+    if legacy_layout:
+        for col in state["missing_columns"]:
+            x[f"{col}__missing"] = x[col].isna().astype("int8")
+        x["is_pitcher_cold_start"] = (x["asof_pitcher_n"].fillna(0) <= 0).astype("int8")
+        x["is_batter_cold_start"] = (x["asof_batter_n"].fillna(0) <= 0).astype("int8")
+    else:
+        x["pitcher_rate_missing"] = x[
+            [
+                "asof_pitcher_success_rate", "asof_pitcher_reverse_rate",
+                "asof_pitcher_middle_rate", "asof_pitcher_ball_rate", "asof_pitcher_strike_rate",
+            ]
+        ].isna().any(axis=1).astype("int8")
+        x["batter_rate_missing"] = x[
+            ["asof_batter_success_rate", "asof_batter_middle_rate"]
+        ].isna().any(axis=1).astype("int8")
+        x["recent_form_missing"] = x[recent_success_cols + recent_middle_cols].isna().any(axis=1).astype("int8")
+        x["pitchmix_available"] = x[
+            [
+                "asof_pitcher_fastball_rate",
+                "asof_pitcher_breaking_rate",
+                "asof_pitcher_offspeed_rate",
+            ]
+        ].notna().all(axis=1).astype("int8")
+
+        pitcher_count = pd.to_numeric(x["asof_pitcher_n"], errors="coerce").fillna(0.0).clip(lower=0.0)
+        batter_count = pd.to_numeric(x["asof_batter_n"], errors="coerce").fillna(0.0).clip(lower=0.0)
+        pitchmix_count = pd.to_numeric(x["asof_pitcher_pitchmix_n"], errors="coerce").fillna(0.0).clip(lower=0.0)
+        x["pitcher_rate_reliability"] = pitcher_count / (pitcher_count + state["alpha"])
+        x["batter_rate_reliability"] = batter_count / (batter_count + state["alpha"])
+
+        def posterior_sd(smoothed_col, count):
+            probability = x[smoothed_col].clip(lower=0.0, upper=1.0)
+            return np.sqrt(probability * (1.0 - probability) / (count + state["alpha"] + 1.0))
+
+        x["pitcher_success_posterior_sd"] = posterior_sd(
+            "asof_pitcher_success_rate_smoothed", pitcher_count
+        )
+        x["batter_success_posterior_sd"] = posterior_sd(
+            "asof_batter_success_rate_smoothed", batter_count
+        )
+        for pitch_name in ("fastball", "breaking", "offspeed"):
+            x[f"pitchmix_{pitch_name}_posterior_sd"] = posterior_sd(
+                f"asof_pitcher_{pitch_name}_rate_smoothed", pitchmix_count
+            )
     mix_cols = [
         "asof_pitcher_fastball_rate",
         "asof_pitcher_breaking_rate",
@@ -133,7 +182,8 @@ def build_features(frame, state):
     x["is_pitcher_team_trailing"] = (x["score_diff_pitcher_team"] < 0).astype("int8")
 
     # 1. Count features
-    x['count_advantage'] = x['strikes_before'] - x['balls_before']
+    if legacy_layout:
+        x['count_advantage'] = x['strikes_before'] - x['balls_before']
     x['count_pressure'] = x['balls_before'] - x['strikes_before']
     x['is_hitter_count'] = (x['balls_before'] > x['strikes_before']).astype("int8")
     x['is_pitcher_count'] = (x['strikes_before'] > x['balls_before']).astype("int8")
@@ -157,8 +207,9 @@ def build_features(frame, state):
 
     # 4. Inning/Score
     x['tie_game'] = (x['score_diff_pitcher_team'] == 0).astype("int8")
-    x['pitcher_leading'] = (x['score_diff_pitcher_team'] > 0).astype("int8")
-    x['pitcher_trailing'] = (x['score_diff_pitcher_team'] < 0).astype("int8")
+    if legacy_layout:
+        x['pitcher_leading'] = (x['score_diff_pitcher_team'] > 0).astype("int8")
+        x['pitcher_trailing'] = (x['score_diff_pitcher_team'] < 0).astype("int8")
     x['extra_inning'] = (x['inning'] >= 10).astype("int8")
     x['very_high_li'] = (x['li'] >= 2.0).astype("int8")
     x['late_close'] = (x['late_inning'] & x['close_game']).astype("int8")
@@ -184,8 +235,12 @@ def build_features(frame, state):
     x['v4_middle_x_risp'] = v4_pm * x['risp']
 
     # 7. v6 추가: 구종 운영 x 상황 (조선미 2023, 상황별 구종 예측). 한 행 내 계산.
-    v6_off = x['asof_pitcher_offspeed_rate'].fillna(0.0)
-    v6_brk = x['asof_pitcher_breaking_rate'].fillna(0.0)
+    if not smoothed_pitchmix:
+        v6_off = x['asof_pitcher_offspeed_rate'].fillna(0.0)
+        v6_brk = x['asof_pitcher_breaking_rate'].fillna(0.0)
+    else:
+        v6_off = x['asof_pitcher_offspeed_rate_smoothed']
+        v6_brk = x['asof_pitcher_breaking_rate_smoothed']
     x['v6_offspeed_x_2strike'] = v6_off * x['is_two_strike']
     x['v6_breaking_x_2strike'] = v6_brk * x['is_two_strike']
     x['v6_nonfastball_x_risp'] = (v6_off + v6_brk) * x['risp']

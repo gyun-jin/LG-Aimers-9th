@@ -14,11 +14,13 @@ import time
 from pathlib import Path
 from typing import Any
 
+# Windows wheels에서 pandas가 LightGBM보다 먼저 로드되면 OpenMP DLL 충돌로
+# LGBM_DatasetSetField access violation이 발생한다. 반드시 이 import가 먼저다.
+from lightgbm import LGBMClassifier, early_stopping as lgb_early_stopping
 import joblib
 import numpy as np
 import pandas as pd
 from catboost import CatBoostClassifier
-from lightgbm import LGBMClassifier, early_stopping as lgb_early_stopping
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.impute import SimpleImputer
@@ -34,7 +36,7 @@ THREADS = 6
 
 def rolling_splits(frame: pd.DataFrame) -> list[tuple[np.ndarray, np.ndarray, str, int]]:
     folds = []
-    for train_end, val_season in [(2021, 2022), (2022, 2023), (2023, 2024)]:
+    for train_end, val_season in [(2020, 2021), (2021, 2022), (2022, 2023), (2023, 2024)]:
         train_idx = np.flatnonzero((frame["season"] >= 2019) & (frame["season"] <= train_end))
         val_idx = np.flatnonzero(frame["season"] == val_season)
         folds.append((train_idx, val_idx, f"2019-{train_end}", val_season))
@@ -213,16 +215,11 @@ def fit_predict_model(
         encoder = fit_category_encoder(x_train, cat_cols, "category_code")
         train_ready = apply_category_encoder(x_train, encoder)
         val_ready = apply_category_encoder(x_val, encoder)
-        train_ready = train_ready.drop(columns=["season", "game_type"], errors="ignore")
-        val_ready = val_ready.drop(columns=["season", "game_type"], errors="ignore")
     else:
         # 익명 ID를 포함한 범주형 값은 학습 fold 빈도로만 인코딩한다.
         encoder = fit_category_encoder(x_train, cat_cols, "frequency")
         train_ready = apply_category_encoder(x_train, encoder)
         val_ready = apply_category_encoder(x_val, encoder)
-        if name == "xgboost":
-            train_ready = train_ready.drop(columns=["season", "game_type"], errors="ignore")
-            val_ready = val_ready.drop(columns=["season", "game_type"], errors="ignore")
 
     started = time.perf_counter()
     if name == "random_forest":
@@ -281,12 +278,9 @@ def fit_final_model(
     elif name == "lightgbm":
         encoder = fit_category_encoder(x_train, cat_cols, "category_code")
         ready = apply_category_encoder(x_train, encoder)
-        ready = ready.drop(columns=["season", "game_type"], errors="ignore")
     else:
         encoder = fit_category_encoder(x_train, cat_cols, "frequency")
         ready = apply_category_encoder(x_train, encoder)
-        if name == "xgboost":
-            ready = ready.drop(columns=["season", "game_type"], errors="ignore")
     started = time.perf_counter()
     if name == "random_forest":
         model = fit_official_random_forest(model, ready, y_train)

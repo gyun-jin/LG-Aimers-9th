@@ -62,13 +62,18 @@ class FeatureState:
     rate_priors: dict[str, float]
     missing_columns: list[str]
     drop_redundant: bool
+    feature_version: int = 2
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "FeatureState":
-        return cls(**value)
+        # 기존 submit_v6 모델에는 feature_version이 없다. 그 모델은 저장 당시의
+        # 131개 피처를 그대로 재현하고, 새로 fit한 state부터 정리된 v2 피처를 쓴다.
+        normalized = dict(value)
+        normalized.setdefault("feature_version", 1)
+        return cls(**normalized)
 
 
 def fit_feature_state(
@@ -103,6 +108,7 @@ def fit_feature_state(
         rate_priors=rate_priors,
         missing_columns=missing,
         drop_redundant=bool(drop_redundant),
+        feature_version=2,
     )
 
 
@@ -114,6 +120,10 @@ def build_features(frame: pd.DataFrame, state: FeatureState | dict[str, Any]) ->
     """test 내부 집계 없이 한 행과 fold-fit 상수만으로 피처를 만든다."""
     if isinstance(state, dict):
         state = FeatureState.from_dict(state)
+    # v3는 CatBoost가 잘 활용하던 legacy 131-column layout을 유지하면서
+    # v6 pitchmix 상호작용의 결측 처리만 smoothed prior 방식으로 교체한다.
+    legacy_layout = state.feature_version in (1, 3)
+    smoothed_pitchmix = state.feature_version >= 2
     missing = [c for c in state.input_columns if c not in frame.columns]
     extra = [c for c in frame.columns if c not in state.input_columns + [ID_COL, TARGET_COL]]
     if missing or extra:
@@ -167,10 +177,51 @@ def build_features(frame: pd.DataFrame, state: FeatureState | dict[str, Any]) ->
         x["recent_middle_mean_1_3_5"] - x["asof_pitcher_middle_rate_smoothed"]
     )
 
-    for col in state.missing_columns:
-        x[f"{col}__missing"] = x[col].isna().astype("int8")
-    x["is_pitcher_cold_start"] = (x["asof_pitcher_n"].fillna(0) <= 0).astype("int8")
-    x["is_batter_cold_start"] = (x["asof_batter_n"].fillna(0) <= 0).astype("int8")
+    if legacy_layout:
+        for col in state.missing_columns:
+            x[f"{col}__missing"] = x[col].isna().astype("int8")
+        x["is_pitcher_cold_start"] = (x["asof_pitcher_n"].fillna(0) <= 0).astype("int8")
+        x["is_batter_cold_start"] = (x["asof_batter_n"].fillna(0) <= 0).astype("int8")
+    else:
+        # 원본 데이터에서 같은 시점에 함께 비는 rate들의 중복 indicator를 하나로 축약한다.
+        x["pitcher_rate_missing"] = x[
+            [
+                "asof_pitcher_success_rate", "asof_pitcher_reverse_rate",
+                "asof_pitcher_middle_rate", "asof_pitcher_ball_rate", "asof_pitcher_strike_rate",
+            ]
+        ].isna().any(axis=1).astype("int8")
+        x["batter_rate_missing"] = x[
+            ["asof_batter_success_rate", "asof_batter_middle_rate"]
+        ].isna().any(axis=1).astype("int8")
+        x["recent_form_missing"] = x[recent_success_cols + recent_middle_cols].isna().any(axis=1).astype("int8")
+        x["pitchmix_available"] = x[
+            [
+                "asof_pitcher_fastball_rate",
+                "asof_pitcher_breaking_rate",
+                "asof_pitcher_offspeed_rate",
+            ]
+        ].notna().all(axis=1).astype("int8")
+
+        pitcher_count = pd.to_numeric(x["asof_pitcher_n"], errors="coerce").fillna(0.0).clip(lower=0.0)
+        batter_count = pd.to_numeric(x["asof_batter_n"], errors="coerce").fillna(0.0).clip(lower=0.0)
+        pitchmix_count = pd.to_numeric(x["asof_pitcher_pitchmix_n"], errors="coerce").fillna(0.0).clip(lower=0.0)
+        x["pitcher_rate_reliability"] = pitcher_count / (pitcher_count + state.alpha)
+        x["batter_rate_reliability"] = batter_count / (batter_count + state.alpha)
+
+        def posterior_sd(smoothed_col: str, count: pd.Series) -> pd.Series:
+            probability = x[smoothed_col].clip(lower=0.0, upper=1.0)
+            return np.sqrt(probability * (1.0 - probability) / (count + state.alpha + 1.0))
+
+        x["pitcher_success_posterior_sd"] = posterior_sd(
+            "asof_pitcher_success_rate_smoothed", pitcher_count
+        )
+        x["batter_success_posterior_sd"] = posterior_sd(
+            "asof_batter_success_rate_smoothed", batter_count
+        )
+        for pitch_name in ("fastball", "breaking", "offspeed"):
+            x[f"pitchmix_{pitch_name}_posterior_sd"] = posterior_sd(
+                f"asof_pitcher_{pitch_name}_rate_smoothed", pitchmix_count
+            )
     mix_cols = [
         "asof_pitcher_fastball_rate",
         "asof_pitcher_breaking_rate",
@@ -183,7 +234,8 @@ def build_features(frame: pd.DataFrame, state: FeatureState | dict[str, Any]) ->
     x["is_pitcher_team_trailing"] = (x["score_diff_pitcher_team"] < 0).astype("int8")
 
     # 1. Count features
-    x['count_advantage'] = x['strikes_before'] - x['balls_before']
+    if legacy_layout:
+        x['count_advantage'] = x['strikes_before'] - x['balls_before']
     x['count_pressure'] = x['balls_before'] - x['strikes_before']
     x['is_hitter_count'] = (x['balls_before'] > x['strikes_before']).astype("int8")
     x['is_pitcher_count'] = (x['strikes_before'] > x['balls_before']).astype("int8")
@@ -210,8 +262,9 @@ def build_features(frame: pd.DataFrame, state: FeatureState | dict[str, Any]) ->
     # 4. Inning/Score
     # score_abs, close_game, late_inning, high_li, pressure_state already defined above
     x['tie_game'] = (x['score_diff_pitcher_team'] == 0).astype("int8")
-    x['pitcher_leading'] = (x['score_diff_pitcher_team'] > 0).astype("int8")
-    x['pitcher_trailing'] = (x['score_diff_pitcher_team'] < 0).astype("int8")
+    if legacy_layout:
+        x['pitcher_leading'] = (x['score_diff_pitcher_team'] > 0).astype("int8")
+        x['pitcher_trailing'] = (x['score_diff_pitcher_team'] < 0).astype("int8")
     x['extra_inning'] = (x['inning'] >= 10).astype("int8")
     x['very_high_li'] = (x['li'] >= 2.0).astype("int8")
     x['late_close'] = (x['late_inning'] & x['close_game']).astype("int8")
@@ -238,8 +291,14 @@ def build_features(frame: pd.DataFrame, state: FeatureState | dict[str, Any]) ->
     x['v4_middle_x_risp'] = v4_pm * x['risp']
 
     # 7. v6 추가: 구종 운영 x 상황 (조선미 2023, 상황별 구종 예측). 한 행 내 계산.
-    v6_off = x['asof_pitcher_offspeed_rate'].fillna(0.0)
-    v6_brk = x['asof_pitcher_breaking_rate'].fillna(0.0)
+    if not smoothed_pitchmix:
+        # 저장된 v6 모델의 schema/예측을 보존한다.
+        v6_off = x['asof_pitcher_offspeed_rate'].fillna(0.0)
+        v6_brk = x['asof_pitcher_breaking_rate'].fillna(0.0)
+    else:
+        # 신규/콜드스타트 투수를 구종 미사용으로 오해하지 않도록 fold-fit prior로 평활한다.
+        v6_off = x['asof_pitcher_offspeed_rate_smoothed']
+        v6_brk = x['asof_pitcher_breaking_rate_smoothed']
     x['v6_offspeed_x_2strike'] = v6_off * x['is_two_strike']
     x['v6_breaking_x_2strike'] = v6_brk * x['is_two_strike']
     x['v6_nonfastball_x_risp'] = (v6_off + v6_brk) * x['risp']

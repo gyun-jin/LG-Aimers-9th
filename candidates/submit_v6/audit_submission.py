@@ -17,12 +17,17 @@ import subprocess
 import sys
 import tempfile
 import zipfile
+from pathlib import Path
+
+# script.py를 같은 프로세스에서 불러오는 행 독립성 검사도 실제 제출 환경과
+# 같은 Windows DLL 초기화 순서를 사용한다.
+import lightgbm as _lightgbm_import_guard  # noqa: F401
 
 import joblib
 import numpy as np
 import pandas as pd
 
-DATA = r'C:\Users\김아영\Desktop\open\data'
+DATA = str(Path(__file__).resolve().parents[2] / 'data')
 FORBIDDEN_IMPORTS = r'requests|urllib|http\.client|socket|openai|google\.generativeai|anthropic|huggingface|transformers|torch\.hub|from_pretrained|boto3|gdown'
 PRETRAINED_PKGS = r'^(transformers|huggingface|timm|torchvision|sentence-transformers|open_clip)'
 REQUIRED_PINS = ['numpy', 'scipy', 'scikit-learn', 'joblib', 'pandas']
