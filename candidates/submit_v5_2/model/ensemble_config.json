@@ -1,0 +1,10 @@
+{
+  "selected_ensemble": "tm_metadata_physical_pitchmix",
+  "weights": {
+    "catboost": 0.8,
+    "lightgbm": 0.2
+  },
+  "calibration": "platt",
+  "trackman_strategy": "mapping_all_shrink",
+  "selection_metric": "full three-fold mean Brier; packaged by user request despite near-tie worst fold caveat"
+}

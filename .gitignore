@@ -1,4 +1,5 @@
 __pycache__/
+pycache/
 .ipynb_checkpoints/
 .venv/
 .env
@@ -8,4 +9,18 @@ outputs/
 .pytest_cache/
 .mypy_cache/
 .DS_Store
+<<<<<<< HEAD
 tabiclv2-submit/model/classifier.pkl
+=======
+*.pem
+*.pyc
+catboost_info/
+data/train.csv
+data/test.csv
+data/trackman_history.csv
+train_trackman/trackman_history.csv
+hand_cleaning_analysis/train_hand_trackman_clean.csv
+candidates/**/data/train.csv
+candidates/**/data/test.csv
+candidates/**/data/trackman_history.csv
+>>>>>>> 282e120cfc821db2ddc662bef796621b4ff99b0b

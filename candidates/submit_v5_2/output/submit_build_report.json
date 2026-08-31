@@ -1,0 +1,85 @@
+{
+  "environment": {
+    "python": "3.11.15",
+    "platform": "macOS-26.5.2-arm64-arm-64bit"
+  },
+  "selected_feature_set": "tm_metadata_physical_pitchmix",
+  "selected_calibration": "platt",
+  "weights": {
+    "catboost": 0.8,
+    "lightgbm": 0.2
+  },
+  "trackman_strategy": "mapping_all_shrink",
+  "folds": [
+    {
+      "season": 2022,
+      "raw_metrics": {
+        "brier": 0.24329609175425357,
+        "log_loss": 0.6793901161007931,
+        "auc": 0.5791270475875341,
+        "mean_pred": 0.53025484362023,
+        "mean_target": 0.5289204435249241,
+        "calibration_error": 0.005213159243980877
+      },
+      "calibrated_metrics": {
+        "brier": 0.2432590615726274,
+        "log_loss": 0.679310438198496,
+        "auc": 0.5791270475875341,
+        "mean_pred": 0.5271218482606954,
+        "mean_target": 0.5289204435249241,
+        "calibration_error": 0.0020463072468494725
+      }
+    },
+    {
+      "season": 2023,
+      "raw_metrics": {
+        "brier": 0.24987258297437898,
+        "log_loss": 0.692894108090963,
+        "auc": 0.5264620466234781,
+        "mean_pred": 0.5045409140097982,
+        "mean_target": 0.49995723449750534,
+        "calibration_error": 0.012885507508020963
+      },
+      "calibrated_metrics": {
+        "brier": 0.24986191679086686,
+        "log_loss": 0.6928722848978875,
+        "auc": 0.5264620466234781,
+        "mean_pred": 0.4992896179144805,
+        "mean_target": 0.49995723449750534,
+        "calibration_error": 0.004156466782001063
+      }
+    },
+    {
+      "season": 2024,
+      "raw_metrics": {
+        "brier": 0.24783841645360172,
+        "log_loss": 0.6888059893360655,
+        "auc": 0.5502641673208813,
+        "mean_pred": 0.49447795551104506,
+        "mean_target": 0.4861049201797189,
+        "calibration_error": 0.009428843414330975
+      },
+      "calibrated_metrics": {
+        "brier": 0.2477631897413083,
+        "log_loss": 0.688654332042037,
+        "auc": 0.5502641673208813,
+        "mean_pred": 0.4884021192042407,
+        "mean_target": 0.4861049201797189,
+        "calibration_error": 0.00379065312900668
+      }
+    }
+  ],
+  "mean_brier": 0.2469613893682675,
+  "worst_brier": 0.24986191679086686,
+  "zip_members": [
+    "model/",
+    "model/final_model.joblib",
+    "model/calibration_model.joblib",
+    "model/feature_schema.json",
+    "model/ensemble_config.json",
+    "script.py",
+    "requirements.txt"
+  ],
+  "submit_zip_sha256": "284e2a00908ae0a5bd81ef40d57c11b3df7210dfd977e5f353b852e50b449ef2",
+  "elapsed_seconds": 648.5062530830037
+}
