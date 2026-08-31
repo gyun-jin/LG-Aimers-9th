@@ -1,0 +1,1026 @@
+{
+  "rows": 746504,
+  "folds": [
+    2022,
+    2023,
+    2024
+  ],
+  "selection_metric": "progressive_platt mean fold Brier, then worst fold Brier",
+  "closed_form_row_weighted_raw_catboost_weight": 0.9238709608849186,
+  "residual_correlation": {
+    "all": 0.9972326806224996,
+    "2022": 0.998854836227971,
+    "2023": 0.9953645772193225,
+    "2024": 0.9989854017087529
+  },
+  "baselines": {
+    "catboost_raw": {
+      "fold_brier": {
+        "2022": 0.24315017495378277,
+        "2023": 0.24991172763511774,
+        "2024": 0.24774629641223817
+      },
+      "mean_fold_brier": 0.24693606633371287,
+      "worst_fold_brier": 0.24991172763511774,
+      "row_weighted_brier": 0.24693485552435362,
+      "mean_prediction": 0.5092717409133911,
+      "mean_target": 0.5048546290441847
+    },
+    "catboost_progressive_platt": {
+      "fold_brier": {
+        "2022": 0.24315017495378277,
+        "2023": 0.24990387724644203,
+        "2024": 0.2476763629996983
+      },
+      "mean_fold_brier": 0.24691013839997436,
+      "worst_fold_brier": 0.24990387724644203,
+      "row_weighted_brier": 0.24690852468581515,
+      "mean_prediction": 0.506958147836334,
+      "mean_target": 0.5048546290441847
+    },
+    "tabm_raw": {
+      "fold_brier": {
+        "2022": 0.24379437198460815,
+        "2023": 0.25244986260310937,
+        "2024": 0.24816434298936704
+      },
+      "mean_fold_brier": 0.24813619252569485,
+      "worst_fold_brier": 0.25244986260310937,
+      "row_weighted_brier": 0.24812516937298235,
+      "mean_prediction": 0.5150351524353027,
+      "mean_target": 0.5048546290441847
+    },
+    "tabm_progressive_platt": {
+      "fold_brier": {
+        "2022": 0.24379437198460815,
+        "2023": 0.25283734164686,
+        "2024": 0.24839761617242073
+      },
+      "mean_fold_brier": 0.24834310993462963,
+      "worst_fold_brier": 0.25283734164686,
+      "row_weighted_brier": 0.24833182891805283,
+      "mean_prediction": 0.5121725114098434,
+      "mean_target": 0.5048546290441847
+    }
+  },
+  "selected": {
+    "catboost_weight": 0.9238709608849186,
+    "tabm_weight": 0.0761290391150814,
+    "raw": {
+      "fold_brier": {
+        "2022": 0.24315921793625747,
+        "2023": 0.24989183846757143,
+        "2024": 0.2477327689513649
+      },
+      "mean_fold_brier": 0.2469279417850646,
+      "worst_fold_brier": 0.24989183846757143,
+      "row_weighted_brier": 0.24692671798064794,
+      "mean_prediction": 0.5097104907035828,
+      "mean_target": 0.5048546290441847
+    },
+    "progressive_platt": {
+      "fold_brier": {
+        "2022": 0.24315921793625747,
+        "2023": 0.24987796310813232,
+        "2024": 0.24765007475972897
+      },
+      "mean_fold_brier": 0.24689575193470625,
+      "worst_fold_brier": 0.24987796310813232,
+      "row_weighted_brier": 0.2468940720684154,
+      "mean_prediction": 0.5067902714730045,
+      "mean_target": 0.5048546290441847
+    },
+    "global_platt_insample_diagnostic": {
+      "fold_brier": {
+        "2022": 0.24310148388462863,
+        "2023": 0.2498727243609915,
+        "2024": 0.2476448866491595
+      },
+      "mean_fold_brier": 0.24687303163159321,
+      "worst_fold_brier": 0.2498727243609915,
+      "row_weighted_brier": 0.24687144790704105,
+      "mean_prediction": 0.504818827433236,
+      "mean_target": 0.5048546290441847
+    }
+  },
+  "rolling_nested": {
+    "decisions": {
+      "2022": {
+        "catboost_weight": 1.0,
+        "calibration": "none (no previous OOF)"
+      },
+      "2023": {
+        "catboost_weight": 1.0,
+        "tabm_weight": 0.0,
+        "calibration": "Platt fit only on earlier folds"
+      },
+      "2024": {
+        "catboost_weight": 0.95,
+        "tabm_weight": 0.050000000000000044,
+        "calibration": "Platt fit only on earlier folds"
+      }
+    },
+    "metrics": {
+      "fold_brier": {
+        "2022": 0.24315017495378277,
+        "2023": 0.24990387724644203,
+        "2024": 0.2476570314950183
+      },
+      "mean_fold_brier": 0.24690369456508102,
+      "worst_fold_brier": 0.24990387724644203,
+      "row_weighted_brier": 0.24690195985594565,
+      "mean_prediction": 0.5064157368433302,
+      "mean_target": 0.5048546290441847
+    }
+  },
+  "candidates": [
+    {
+      "catboost_weight": 0.0,
+      "tabm_weight": 1.0,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24379437198460815,
+          "2023": 0.25244986260310937,
+          "2024": 0.24816434298936704
+        },
+        "mean_fold_brier": 0.24813619252569485,
+        "worst_fold_brier": 0.25244986260310937,
+        "row_weighted_brier": 0.24812516937298235,
+        "mean_prediction": 0.5150351524353027,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24379437198460815,
+          "2023": 0.25283734164686,
+          "2024": 0.24839761617242073
+        },
+        "mean_fold_brier": 0.24834310993462963,
+        "worst_fold_brier": 0.25283734164686,
+        "row_weighted_brier": 0.24833182891805283,
+        "mean_prediction": 0.5121725114098434,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.2443184789615652,
+          "2023": 0.2509157451934304,
+          "2024": 0.24834858090389844
+        },
+        "mean_fold_brier": 0.24786093501963136,
+        "worst_fold_brier": 0.2509157451934304,
+        "row_weighted_brier": 0.24785690989384945,
+        "mean_prediction": 0.5048484770524565,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.05,
+      "tabm_weight": 0.95,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24373514850492775,
+          "2023": 0.2521790271998435,
+          "2024": 0.24811281122637852
+        },
+        "mean_fold_brier": 0.2480089956437166,
+        "worst_fold_brier": 0.2521790271998435,
+        "row_weighted_brier": 0.2479989588262335,
+        "mean_prediction": 0.514747142791748,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24373514850492775,
+          "2023": 0.2525737639175015,
+          "2024": 0.24833453960832308
+        },
+        "mean_fold_brier": 0.24821448401025079,
+        "worst_fold_brier": 0.2525737639175015,
+        "row_weighted_brier": 0.24820408489323992,
+        "mean_prediction": 0.5116031315084784,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24418069925151614,
+          "2023": 0.25088175047139927,
+          "2024": 0.24828395036638232
+        },
+        "mean_fold_brier": 0.24778213336309926,
+        "worst_fold_brier": 0.25088175047139927,
+        "row_weighted_brier": 0.24777810593806862,
+        "mean_prediction": 0.5048477054809252,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.1,
+      "tabm_weight": 0.9,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24367876864686572,
+          "2023": 0.251923342182919,
+          "2024": 0.248064503606899
+        },
+        "mean_fold_brier": 0.24788887147889457,
+        "worst_fold_brier": 0.251923342182919,
+        "row_weighted_brier": 0.24787976881558918,
+        "mean_prediction": 0.514458954334259,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24367876864686572,
+          "2023": 0.25229759976194577,
+          "2024": 0.24827149460704678
+        },
+        "mean_fold_brier": 0.24808262100528608,
+        "worst_fold_brier": 0.25229759976194577,
+        "row_weighted_brier": 0.24807315459726606,
+        "mean_prediction": 0.5110231573619277,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.2440494194857515,
+          "2023": 0.25084021235461823,
+          "2024": 0.24821991551001413
+        },
+        "mean_fold_brier": 0.24770318245012793,
+        "worst_fold_brier": 0.25084021235461823,
+        "row_weighted_brier": 0.24769917803326272,
+        "mean_prediction": 0.5048468226035474,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.15,
+      "tabm_weight": 0.85,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24362523235920303,
+          "2023": 0.2516828095222735,
+          "2024": 0.24801942002549895
+        },
+        "mean_fold_brier": 0.2477758206356585,
+        "worst_fold_brier": 0.2516828095222735,
+        "row_weighted_brier": 0.24776759993617864,
+        "mean_prediction": 0.5141708254814148,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24362523235920303,
+          "2023": 0.2520306790166065,
+          "2024": 0.24820880158192907
+        },
+        "mean_fold_brier": 0.2479549043192462,
+        "worst_fold_brier": 0.2520306790166065,
+        "row_weighted_brier": 0.2479463266514032,
+        "mean_prediction": 0.5104669201725769,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24392546455707473,
+          "2023": 0.25079111884337474,
+          "2024": 0.2481569211569933
+        },
+        "mean_fold_brier": 0.24762450151914758,
+        "worst_fold_brier": 0.25079111884337474,
+        "row_weighted_brier": 0.24762054674942635,
+        "mean_prediction": 0.5048458143594842,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.2,
+      "tabm_weight": 0.8,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24357453945008173,
+          "2023": 0.2514574251607079,
+          "2024": 0.24797756075413097
+        },
+        "mean_fold_brier": 0.24766984178830687,
+        "worst_fold_brier": 0.2514574251607079,
+        "row_weighted_brier": 0.24766245088234073,
+        "mean_prediction": 0.5138825178146362,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24357453945008173,
+          "2023": 0.25177442359809077,
+          "2024": 0.24814682701751775
+        },
+        "mean_fold_brier": 0.24783193002189674,
+        "worst_fold_brier": 0.25177442359809077,
+        "row_weighted_brier": 0.24782419311543097,
+        "mean_prediction": 0.5099377606145195,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24380957781152135,
+          "2023": 0.25073465392467215,
+          "2024": 0.24809544232272385
+        },
+        "mean_fold_brier": 0.24754655801963912,
+        "worst_fold_brier": 0.25073465392467215,
+        "row_weighted_brier": 0.2475426803365216,
+        "mean_prediction": 0.504844667002378,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.25,
+      "tabm_weight": 0.75,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24352669022034842,
+          "2023": 0.25124719100929377,
+          "2024": 0.24793892565712003
+        },
+        "mean_fold_brier": 0.24757093562892074,
+        "worst_fold_brier": 0.25124719100929377,
+        "row_weighted_brier": 0.2475643223362855,
+        "mean_prediction": 0.513594388961792,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24352669022034842,
+          "2023": 0.25153020045631125,
+          "2024": 0.24808598465366355
+        },
+        "mean_fold_brier": 0.24771429177677443,
+        "worst_fold_brier": 0.25153020045631125,
+        "row_weighted_brier": 0.24770734418146748,
+        "mean_prediction": 0.5094390442940642,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24370239321516307,
+          "2023": 0.25067123086193854,
+          "2024": 0.24803597679294237
+        },
+        "mean_fold_brier": 0.24746986695668136,
+        "worst_fold_brier": 0.25067123086193854,
+        "row_weighted_brier": 0.24746609392577767,
+        "mean_prediction": 0.5048433681395867,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.3,
+      "tabm_weight": 0.7,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24348168441496773,
+          "2023": 0.2510521076222152,
+          "2024": 0.24790351457270499
+        },
+        "mean_fold_brier": 0.24747910220329597,
+        "worst_fold_brier": 0.2510521076222152,
+        "row_weighted_brier": 0.24747321434080463,
+        "mean_prediction": 0.513306200504303,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24348168441496773,
+          "2023": 0.25129930327810807,
+          "2024": 0.24802673542075196
+        },
+        "mean_fold_brier": 0.2476025743712759,
+        "worst_fold_brier": 0.25129930327810807,
+        "row_weighted_brier": 0.2475963617866842,
+        "mean_prediction": 0.5089740540710123,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.2436044088088068,
+          "2023": 0.2506015229896914,
+          "2024": 0.24797903578825592
+        },
+        "mean_fold_brier": 0.2473949891955847,
+        "worst_fold_brier": 0.2506015229896914,
+        "row_weighted_brier": 0.24739134768782278,
+        "mean_prediction": 0.5048419080867933,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.35,
+      "tabm_weight": 0.65,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24343952210052036,
+          "2023": 0.25087217402149237,
+          "2024": 0.24787132768776463
+        },
+        "mean_fold_brier": 0.2473943412699258,
+        "worst_fold_brier": 0.25087217402149237,
+        "row_weighted_brier": 0.24738912665977544,
+        "mean_prediction": 0.5130180716514587,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24343952210052036,
+          "2023": 0.2510829358051004,
+          "2024": 0.24796958607671846
+        },
+        "mean_fold_brier": 0.24749734799411308,
+        "worst_fold_brier": 0.2510829358051004,
+        "row_weighted_brier": 0.2474918139545909,
+        "mean_prediction": 0.5085459114244981,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24351596510465637,
+          "2023": 0.25052648753824314,
+          "2024": 0.24792513317395318
+        },
+        "mean_fold_brier": 0.24732252860561754,
+        "worst_fold_brier": 0.25052648753824314,
+        "row_weighted_brier": 0.24731904384268003,
+        "mean_prediction": 0.5048402815974568,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.4,
+      "tabm_weight": 0.6,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24340020358249434,
+          "2023": 0.2507073928417533,
+          "2024": 0.24784236506308946
+        },
+        "mean_fold_brier": 0.24731665382911236,
+        "worst_fold_brier": 0.2507073928417533,
+        "row_weighted_brier": 0.24731206028164232,
+        "mean_prediction": 0.5127298831939697,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24340020358249434,
+          "2023": 0.2508821946048298,
+          "2024": 0.24791508481759658
+        },
+        "mean_fold_brier": 0.24739916100164025,
+        "worst_fold_brier": 0.2508821946048298,
+        "row_weighted_brier": 0.24739424761042442,
+        "mean_prediction": 0.5081575349466605,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.2434372268054011,
+          "2023": 0.25044738044593823,
+          "2024": 0.24787477201542527
+        },
+        "mean_fold_brier": 0.24725312642225486,
+        "worst_fold_brier": 0.25044738044593823,
+        "row_weighted_brier": 0.24724982090556735,
+        "mean_prediction": 0.5048384897969986,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.45,
+      "tabm_weight": 0.55,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24336372834960934,
+          "2023": 0.25055775989341367,
+          "2024": 0.24781662643914434
+        },
+        "mean_fold_brier": 0.2472460382273891,
+        "worst_fold_brier": 0.25055775989341367,
+        "row_weighted_brier": 0.24724201357082226,
+        "mean_prediction": 0.5124415755271912,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24336372834960934,
+          "2023": 0.2506980562686704,
+          "2024": 0.24786381515929484
+        },
+        "mean_fold_brier": 0.24730853325919155,
+        "worst_fold_brier": 0.2506980562686704,
+        "row_weighted_brier": 0.24730418194287918,
+        "mean_prediction": 0.5078114647341417,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.2433681723553806,
+          "2023": 0.25036575889918505,
+          "2024": 0.24782843075439243
+        },
+        "mean_fold_brier": 0.24718745400298603,
+        "worst_fold_brier": 0.25036575889918505,
+        "row_weighted_brier": 0.24718434636399406,
+        "mean_prediction": 0.5048365423157422,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.5,
+      "tabm_weight": 0.5,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24333009675818132,
+          "2023": 0.25042327792083946,
+          "2024": 0.24779411201211754
+        },
+        "mean_fold_brier": 0.24718249556371277,
+        "worst_fold_brier": 0.25042327792083946,
+        "row_weighted_brier": 0.24717898761468207,
+        "mean_prediction": 0.5121536254882812,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24333009675818132,
+          "2023": 0.25053136481032434,
+          "2024": 0.24781638699012262
+        },
+        "mean_fold_brier": 0.24722594951954277,
+        "worst_fold_brier": 0.25053136481032434,
+        "row_weighted_brier": 0.2472221017793616,
+        "mean_prediction": 0.5075098764704598,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24330859362772062,
+          "2023": 0.25028346686137737,
+          "2024": 0.24778654874994327
+        },
+        "mean_fold_brier": 0.24712620307968045,
+        "worst_fold_brier": 0.25028346686137737,
+        "row_weighted_brier": 0.24712330690435777,
+        "mean_prediction": 0.5048344592760491,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.55,
+      "tabm_weight": 0.44999999999999996,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24329930865453328,
+          "2023": 0.25030394639276515,
+          "2024": 0.24777482172589313
+        },
+        "mean_fold_brier": 0.24712602559106386,
+        "worst_fold_brier": 0.25030394639276515,
+        "row_weighted_brier": 0.2471229821684872,
+        "mean_prediction": 0.5118653178215027,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24329930865453328,
+          "2023": 0.2503828223929335,
+          "2024": 0.24777342463128088
+        },
+        "mean_fold_brier": 0.24715185189291589,
+        "worst_fold_brier": 0.2503828223929335,
+        "row_weighted_brier": 0.24714845002489177,
+        "mean_prediction": 0.507254404535641,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24325810427427566,
+          "2023": 0.2502026006527308,
+          "2024": 0.2477495119136641
+        },
+        "mean_fold_brier": 0.2470700722802235,
+        "worst_fold_brier": 0.2502026006527308,
+        "row_weighted_brier": 0.24706739498103497,
+        "mean_prediction": 0.5048322729826659,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.6,
+      "tabm_weight": 0.4,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24327136406655794,
+          "2023": 0.2501997656166278,
+          "2024": 0.2477587557962386
+        },
+        "mean_fold_brier": 0.24707662849314146,
+        "worst_fold_brier": 0.2501997656166278,
+        "row_weighted_brier": 0.24707399741587302,
+        "mean_prediction": 0.5115771889686584,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24327136406655794,
+          "2023": 0.25025298195975637,
+          "2024": 0.2477355524000876
+        },
+        "mean_fold_brier": 0.24708663280880064,
+        "worst_fold_brier": 0.25025298195975637,
+        "row_weighted_brier": 0.24708362056497687,
+        "mean_prediction": 0.5070460867977952,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24321616041917027,
+          "2023": 0.25012545277050957,
+          "2024": 0.2477176399415807
+        },
+        "mean_fold_brier": 0.2470197510437535,
+        "worst_fold_brier": 0.25012545277050957,
+        "row_weighted_brier": 0.24701729286300209,
+        "mean_prediction": 0.5048300288297448,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.65,
+      "tabm_weight": 0.35,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.2432462630287433,
+          "2023": 0.2501107339208989,
+          "2024": 0.2477459135777529
+        },
+        "mean_fold_brier": 0.2470343035091317,
+        "worst_fold_brier": 0.2501107339208989,
+        "row_weighted_brier": 0.24703203259933412,
+        "mean_prediction": 0.5112890601158142,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.2432462630287433,
+          "2023": 0.25014224352403347,
+          "2024": 0.24770337730046973
+        },
+        "mean_fold_brier": 0.2470306279510822,
+        "worst_fold_brier": 0.25014224352403347,
+        "row_weighted_brier": 0.24702795110916714,
+        "mean_prediction": 0.506885249051326,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24318209160039755,
+          "2023": 0.2500544336686594,
+          "2024": 0.2476911753445533
+        },
+        "mean_fold_brier": 0.24697590020453675,
+        "worst_fold_brier": 0.2500544336686594,
+        "row_weighted_brier": 0.2469736534393691,
+        "mean_prediction": 0.5048277851865594,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.7,
+      "tabm_weight": 0.30000000000000004,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24322400563981197,
+          "2023": 0.25003685379713436,
+          "2024": 0.24773629586837387
+        },
+        "mean_fold_brier": 0.24699905176844006,
+        "worst_fold_brier": 0.25003685379713436,
+        "row_weighted_brier": 0.24699708884204352,
+        "mean_prediction": 0.5110008120536804,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24322400563981197,
+          "2023": 0.2500508521098498,
+          "2024": 0.2476774707588901
+        },
+        "mean_fold_brier": 0.24698410950285063,
+        "worst_fold_brier": 0.2500508521098498,
+        "row_weighted_brier": 0.24698171633057608,
+        "mean_prediction": 0.5067715195724796,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24315514096260668,
+          "2023": 0.2499919726582039,
+          "2024": 0.2476702765294547
+        },
+        "mean_fold_brier": 0.2469391300500884,
+        "worst_fold_brier": 0.2499919726582039,
+        "row_weighted_brier": 0.2469370786001899,
+        "mean_prediction": 0.5048256118032939,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.75,
+      "tabm_weight": 0.25,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.2432045916458015,
+          "2023": 0.24997812347309029,
+          "2024": 0.24772990222309416
+        },
+        "mean_fold_brier": 0.24697087244732865,
+        "worst_fold_brier": 0.24997812347309029,
+        "row_weighted_brier": 0.2469691653257989,
+        "mean_prediction": 0.510712742805481,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.2432045916458015,
+          "2023": 0.24997889956771455,
+          "2024": 0.2476583488265567
+        },
+        "mean_fold_brier": 0.24694728001335756,
+        "worst_fold_brier": 0.24997889956771455,
+        "row_weighted_brier": 0.24694512160163487,
+        "mean_prediction": 0.5067036835193061,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24313451221314902,
+          "2023": 0.24994040393842792,
+          "2024": 0.2476550142377104
+        },
+        "mean_fold_brier": 0.24690997679642912,
+        "worst_fold_brier": 0.24994040393842792,
+        "row_weighted_brier": 0.24690809610900172,
+        "mean_prediction": 0.5048235867762971,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.8,
+      "tabm_weight": 0.19999999999999996,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.2431880211850184,
+          "2023": 0.24993454391613407,
+          "2024": 0.2477267329412702
+        },
+        "mean_fold_brier": 0.2469497660141409,
+        "worst_fold_brier": 0.24993454391613407,
+        "row_weighted_brier": 0.2469482625162763,
+        "mean_prediction": 0.5104243755340576,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.2431880211850184,
+          "2023": 0.24992632861604294,
+          "2024": 0.24764645238893895
+        },
+        "mean_fold_brier": 0.24692026739666675,
+        "worst_fold_brier": 0.24992632861604294,
+        "row_weighted_brier": 0.24691829784959712,
+        "mean_prediction": 0.5066797619814517,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24311942067291772,
+          "2023": 0.2499018448375331,
+          "2024": 0.2476453720874084
+        },
+        "mean_fold_brier": 0.2468888791992864,
+        "worst_fold_brier": 0.2499018448375331,
+        "row_weighted_brier": 0.24688713666405843,
+        "mean_prediction": 0.5048217918924125,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.85,
+      "tabm_weight": 0.15000000000000002,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.2431742943570487,
+          "2023": 0.249906114331692,
+          "2024": 0.24772678768625428
+        },
+        "mean_fold_brier": 0.2469357321249983,
+        "worst_fold_brier": 0.249906114331692,
+        "row_weighted_brier": 0.2469343800708308,
+        "mean_prediction": 0.5101363062858582,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.2431742943570487,
+          "2023": 0.24989293769139023,
+          "2024": 0.2476421286831946
+        },
+        "mean_fold_brier": 0.24690312024387784,
+        "worst_fold_brier": 0.24989293769139023,
+        "row_weighted_brier": 0.2469012967323641,
+        "mean_prediction": 0.5066969938779258,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24310914210771706,
+          "2023": 0.24987807449882377,
+          "2024": 0.24764125132300469
+        },
+        "mean_fold_brier": 0.24687615597651516,
+        "worst_fold_brier": 0.24987807449882377,
+        "row_weighted_brier": 0.2468745117991941,
+        "mean_prediction": 0.5048203068791162,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.9,
+      "tabm_weight": 0.09999999999999998,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.2431634111126271,
+          "2023": 0.24989283483245453,
+          "2024": 0.24773006608088893
+        },
+        "mean_fold_brier": 0.2469287706753235,
+        "worst_fold_brier": 0.24989283483245453,
+        "row_weighted_brier": 0.24692751788211503,
+        "mean_prediction": 0.5098480582237244,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.2431634111126271,
+          "2023": 0.24987839151023333,
+          "2024": 0.2476456160549554
+        },
+        "mean_fold_brier": 0.24689580622593862,
+        "worst_fold_brier": 0.24987839151023333,
+        "row_weighted_brier": 0.24689408889926606,
+        "mean_prediction": 0.5067519097736225,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24310305664560988,
+          "2023": 0.24987042964121953,
+          "2024": 0.24764247981503762
+        },
+        "mean_fold_brier": 0.24687198870062232,
+        "worst_fold_brier": 0.24987042964121953,
+        "row_weighted_brier": 0.24687039721466117,
+        "mean_prediction": 0.5048192029339804,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.9238709608849186,
+      "tabm_weight": 0.0761290391150814,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24315921793625747,
+          "2023": 0.24989183846757143,
+          "2024": 0.2477327689513649
+        },
+        "mean_fold_brier": 0.2469279417850646,
+        "worst_fold_brier": 0.24989183846757143,
+        "row_weighted_brier": 0.24692671798064794,
+        "mean_prediction": 0.5097104907035828,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24315921793625747,
+          "2023": 0.24987796310813232,
+          "2024": 0.24765007475972897
+        },
+        "mean_fold_brier": 0.24689575193470625,
+        "worst_fold_brier": 0.24987796310813232,
+        "row_weighted_brier": 0.2468940720684154,
+        "mean_prediction": 0.5067902714730045,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24310148388462863,
+          "2023": 0.2498727243609915,
+          "2024": 0.2476448866491595
+        },
+        "mean_fold_brier": 0.24687303163159321,
+        "worst_fold_brier": 0.2498727243609915,
+        "row_weighted_brier": 0.24687144790704105,
+        "mean_prediction": 0.504818827433236,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 0.95,
+      "tabm_weight": 0.050000000000000044,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24315537124711842,
+          "2023": 0.24989470615801826,
+          "2024": 0.24773656915752895
+        },
+        "mean_fold_brier": 0.24692888218755518,
+        "worst_fold_brier": 0.24989470615801826,
+        "row_weighted_brier": 0.24692767647612324,
+        "mean_prediction": 0.5095599889755249,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24315537124711842,
+          "2023": 0.24988222932014048,
+          "2024": 0.2476570314950183
+        },
+        "mean_fold_brier": 0.2468982106874257,
+        "worst_fold_brier": 0.24988222932014048,
+        "row_weighted_brier": 0.24689656247026412,
+        "mean_prediction": 0.5068404733722119,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24310068285475248,
+          "2023": 0.24987972069453826,
+          "2024": 0.2476488228974819
+        },
+        "mean_fold_brier": 0.2468764088155909,
+        "worst_fold_brier": 0.24987972069453826,
+        "row_weighted_brier": 0.24687482017139872,
+        "mean_prediction": 0.504818536523358,
+        "mean_target": 0.5048546290441847
+      }
+    },
+    {
+      "catboost_weight": 1.0,
+      "tabm_weight": 0.0,
+      "raw": {
+        "fold_brier": {
+          "2022": 0.24315017495378277,
+          "2023": 0.24991172763511774,
+          "2024": 0.24774629641223817
+        },
+        "mean_fold_brier": 0.24693606633371287,
+        "worst_fold_brier": 0.24991172763511774,
+        "row_weighted_brier": 0.24693485552435362,
+        "mean_prediction": 0.5092717409133911,
+        "mean_target": 0.5048546290441847
+      },
+      "progressive_platt": {
+        "fold_brier": {
+          "2022": 0.24315017495378277,
+          "2023": 0.24990387724644203,
+          "2024": 0.2476763629996983
+        },
+        "mean_fold_brier": 0.24691013839997436,
+        "worst_fold_brier": 0.24990387724644203,
+        "row_weighted_brier": 0.24690852468581515,
+        "mean_prediction": 0.506958147836334,
+        "mean_target": 0.5048546290441847
+      },
+      "global_platt_insample_diagnostic": {
+        "fold_brier": {
+          "2022": 0.24310169975485887,
+          "2023": 0.24990618394847985,
+          "2024": 0.24765999591502608
+        },
+        "mean_fold_brier": 0.2468892932061216,
+        "worst_fold_brier": 0.24990618394847985,
+        "row_weighted_brier": 0.2468876553107759,
+        "mean_prediction": 0.5048183441612549,
+        "mean_target": 0.5048546290441847
+      }
+    }
+  ],
+  "cautions": [
+    "CatBoost OOF uses seed 42 only as a proxy; the submitted v5_8 artifact averages five seeds.",
+    "TabM OOF uses one epoch because CPU training takes 7.5-13.8 minutes per fold and epoch.",
+    "CatBoost OOF uses feature state stored by the final full-training v5_8 artifact.",
+    "CatBoost OOF uses official train.csv; original v5_8 validation removed 116 hand-mismatch rows.",
+    "Both base learners use the target fold for early stopping, matching their existing validation style.",
+    "Global Platt metrics are in-sample diagnostics and are not used for weight selection."
+  ]
+}

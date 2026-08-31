@@ -1,0 +1,5 @@
+__pycache__/
+output/*.npz
+output/*.joblib
+output_smoke/
+output_epoch2diag/

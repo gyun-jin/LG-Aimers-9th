@@ -1,0 +1,40 @@
+{
+  "model_config": {
+    "arch_type": "tabm",
+    "k": 16,
+    "n_blocks": 3,
+    "d_block": 256,
+    "dropout": 0.15,
+    "d_embedding": 16,
+    "n_bins": 32
+  },
+  "n_num_features": 64,
+  "cat_cardinalities": [
+    9,
+    8,
+    14,
+    3,
+    3,
+    5,
+    4,
+    4,
+    3,
+    3,
+    3,
+    9,
+    793,
+    831,
+    3,
+    3,
+    14,
+    14,
+    5,
+    13,
+    25,
+    9
+  ],
+  "validation_brier_2024": 0.24857428669929504,
+  "best_epoch": 1,
+  "trained_rows": 1475092,
+  "seed": 42
+}
