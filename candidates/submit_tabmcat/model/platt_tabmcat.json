@@ -1,0 +1,6 @@
+{
+ "platt_coef": 1.0544212825719521,
+ "platt_intercept": -0.04414449761443985,
+ "model": "v5-3 138feats, CatBoost seed(42,43,44) 0.95 + TabM-mini seed(0,1,2) 0.05",
+ "calibration": "platt on 2024 holdout (train<=2023 fold models, same blend)"
+}
