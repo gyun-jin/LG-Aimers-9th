@@ -1,0 +1,24 @@
+{
+  "model": "catboost_v5_8_retrained_oof",
+  "season": 2024,
+  "train_rows": 1221585,
+  "valid_rows": 253507,
+  "seeds": [
+    42
+  ],
+  "iterations": 600,
+  "brier": 0.24774629641223817,
+  "elapsed_sec": 26.069072008132935,
+  "models": [
+    {
+      "seed": 42,
+      "tree_count": 236,
+      "brier": 0.24774629638369491,
+      "elapsed_sec": 682.6536755561829
+    }
+  ],
+  "feature_count": 138,
+  "categorical_count": 20,
+  "feature_state_source": "submit_v5_8 final_model.joblib (fit on full training data)",
+  "clean_train_difference": "OOF uses official train.csv; original v5_8 removed 116 hand-mismatch rows"
+}

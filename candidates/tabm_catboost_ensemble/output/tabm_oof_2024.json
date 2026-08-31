@@ -1,0 +1,15 @@
+{
+  "model": "tabm_v1_oof",
+  "season": 2024,
+  "train_rows": 1221585,
+  "valid_rows": 253507,
+  "device": "cpu",
+  "batch_size": 4096,
+  "max_epochs": 1,
+  "patience": 1,
+  "best_epoch": 1,
+  "reported_best_brier": 0.2481643557548523,
+  "saved_prediction_brier": 0.24816434298936704,
+  "elapsed_sec": 946.6681170463562,
+  "seed": 42
+}
